@@ -1,0 +1,109 @@
+1. Input
+Input is a set of set of files with name <T>.cpp , accepted by the following regex:
+\s*(<Var>\s+<VarName>;\s+|<Var>\s+<VarName>\s*=\s*.*;\s+)*Create{.*}\s*Destroy{.*}\s*Update{.*}\s*Draw{.*}\s*DrawGUI{.*}\s*
+Example of file:
+________________________________
+int a = 5;
+string s;
+B aba;
+Create{
+	a++;
+}
+Destroy{
+
+}
+Update{
+	s = "abbb";
+}
+Draw{
+
+}
+DrawGUI{
+
+}
+________________________________
+
+2. Replacements.
+Head and footer.
+________________________________
+class file_name{
+public:
+	<file>
+}
+________________________________
+
+Replace
+Create
+to
+void Create()
+and to all other functions.
+
+Assume T_1, ... , T_n - names of files/classes
+Then replace <T_i> to <T_i>_typename;
+Difficult: for all variables of type <T_i> replace <t_j> to <T_i>_container[<t_j>]
+
+3. Additions into internal file.
+Assume T_1, ... , T_n - names of files/classes
+The created internal file contains following statements:
+
+using <T_i>_typename = int;
+map <int, <T_i>> <T_i>_container;
+int <T_i>_objects_number = 0;
+int create_object_<T_i>(){
+	<T_i>_container[<T_i>_objects_number] = <T_i>();
+	<T_i>_container[<T_i>_opjects_number].Create();
+	return <T_i>_object_number++;
+}
+void destroy_object_<T_i>(int num){
+	<T_i>_container[num].Destroy();
+	<T_i>_container.erase(num);
+}
+...
+// Update call
+for(pair<int,<T_i>> i : <T_i> container){
+	if(<T_i>_existance[i.first])
+		<T_i>_container.Update();
+}
+...
+...
+// Draw call
+for(pair<int,<T_i>> i : <T_i> container){
+	if(<T_i>_existance[i.first])
+		<T_i>_container.Draw();
+}
+...
+...
+// DrawGUI call
+for(pair<int,<T_i>> i : <T_i> container){
+	if(<T_i>_existance[i.first])
+		<T_i>_container.DrawGUI();
+}
+...
+
+4. Accepted commands
+<T_i> create_object_<T_i>()
+void destroy_object_<T_i>()
+
+*Input functions (to be described later):
+bool mouse(MB_...)
+bool keyboard(KB_...)
+bool mouse_pressed(MB_...)
+bool keyboard_pressed(KB_...)
+bool mouse_released(MB_...)
+bool keyboard_released(KB_...)
+
+*Draw functions: (to be described later)
+void draw_model(model_type, ...)
+void set_camera_position(...)
+
+*DrawGUI functions: (to be described later)
+void draw_sprite(sprite_type, ...)
+void draw_text(font_type, ...)
+
+5. Starting settings (to be described later)
+Resolution/Fullscreen
+Timer
+Initial class
+Models to load
+Sprites to load
+Views and viewports (probably will not be added)

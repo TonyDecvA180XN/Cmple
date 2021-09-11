@@ -1,0 +1,4 @@
+Initial object: "controll"
+Window Size: 640 x 480
+Number of Views: 1
+View 0: Ortho 2D projection, Window Viewport, Default
