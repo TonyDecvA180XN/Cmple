@@ -1,7 +1,14 @@
-cmake_minimum_required(VERSION 3.0)
+# Set minimum CMake version requirement
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 
-project(Cmple)
+# Configure basic project settings: name, PL, 
+PROJECT(Cmple LANGUAGES C CXX)
 
-add_executable(Cmple Source/main.cpp)
+# Declare C++ source files
+ADD_EXECUTABLE(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/Source/main.cpp)
 
-target_include_directories(Cmple PUBLIC Include)
+# Declare C++ header files
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include)
+
+# Set C++17 standard requirement
+TARGET_COMPILE_FEATURES(${PROJECT_NAME} PUBLIC cxx_std_17)
