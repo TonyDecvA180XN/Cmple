@@ -7,9 +7,12 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
 # Configure basic project settings: name, PL, 
 project(Cmple LANGUAGES C CXX)
 
-# Install glfw library and OpenGL
-find_package(glfw3 REQUIRED)
+# Connect OpenGL library
 find_package(OpenGL REQUIRED)
+
+# Add GLFW and GLAD libraries
+find_package(glfw3 REQUIRED)
+find_package(glad REQUIRED)
 
 # Declare C++ source files
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/Source/main.cpp)
@@ -21,4 +24,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} PUBLIC glfw OpenGL::GL)
+target_link_libraries(${PROJECT_NAME} PUBLIC glfw OpenGL::GL glad::glad)
