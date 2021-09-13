@@ -7,8 +7,9 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
 # Configure basic project settings: name, PL, 
 project(Cmple LANGUAGES C CXX)
 
-# Install fmt library
-find_package(fmt REQUIRED)
+# Install glfw library and OpenGL
+find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
 
 # Declare C++ source files
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/Source/main.cpp)
@@ -20,4 +21,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
+target_link_libraries(${PROJECT_NAME} PUBLIC glfw OpenGL::GL)
