@@ -15,10 +15,12 @@
 #include <dirent.h>
 #endif // __unix__
 
-const std::string Directory_Input_Scripts  =  "input\\scripts\\";
-const std::string Directory_Output_Scripts = "output\\scripts\\";
-const std::string Directory_Search_Input_Scripts  =  "input\\scripts\\*";
-const std::string Directory_Search_Output_Scripts = "output\\scripts\\*";
+const std::string Directory_Input_Scripts  = "input\\scripts\\";
+const std::string Directory_Output_Scripts = "to_compile\\scripts\\";
+const std::string Directory_Const_Scripts  = "const_input\\scripts\\";
+const std::string Directory_Search_Input_Scripts  = "input\\scripts\\*";
+const std::string Directory_Search_Output_Scripts = "to_compile\\scripts\\*";
+const std::string Directory_Search_Const_Scripts  = "const_input\\scripts\\*";
 const std::string Directory_Current  = ".";
 const std::string Directory_Previous = "..";
 const std::set < std::string > Function = {"Create", "Destroy", "Update", "Draw"};
@@ -53,7 +55,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
     else {
         std::cerr << "Error: could not open directory: " << directory << std::endl;
     }
-    return file_list
+    return file_list;
 #endif // __unix__
 }
 
@@ -109,6 +111,8 @@ public:
                     parse_file(file_name);
             }
         }
+
+        create_include_files();
     }
 
 private:
@@ -188,6 +192,61 @@ private:
             }
         }
         split.push_back("\n}\n");
+    }
+
+    void create_include_files(){
+        std::ofstream file;
+        file.open(Directory_Output_Scripts+"classes_implementation.h");
+        for(std::string class_name : classes) {
+            file << "#include \"" << class_name << ".h\"\n";
+        }
+        file << "\n";
+
+        for(std::string class_name : classes) {
+            file << "using " << class_name << "_typename = int;\n";
+        }
+        file << "\n";
+        for(std::string class_name : classes) {
+            file << "std::map <int, " << class_name << "> " << class_name <<"_container;\n";
+        }
+        file << "\n";
+        for(std::string class_name : classes) {
+            file << "int " << class_name << "_objects_number = 0;\n";
+        }
+        file << "\n";
+        for(std::string class_name : classes) {
+            file << "int create_object_" << class_name << "() {\n"
+            << "\t" << class_name << "_container[" << class_name << "_objects_number] = " << class_name << "();\n"
+            << "\t" << class_name << "_container[" << class_name << "_objects_number].Create();\n"
+            << "\treturn " << class_name << "_objects_number++;\n" << "}\n\n";
+        }
+        for(std::string class_name : classes) {
+            file << "void destroy_object_" << class_name << "(int num) {\n"
+            << "\t" << class_name << "_container[num].Destroy();\n"
+            << "\t" << class_name << "_container.erase(num);\n" << "}\n\n";
+        }
+        file.close();
+
+        file.open(Directory_Output_Scripts+"classes_update.h");
+        for(std::string class_name : classes) {
+            file << "for(std::pair <int, " << class_name << "> > i : " << class_name << "_container) {\n"
+            << "\t" << "i.Update();\n" << "}\n";
+        }
+        file.close();
+
+        file.open(Directory_Output_Scripts+"classes_display_3d.h");
+        for(std::string class_name : classes) {
+            file << "for(std::pair <int, " << class_name << "> > i : " << class_name << "_container) {\n"
+            << "\t" << "i.Draw3D();\n" << "}\n";
+        }
+        file.close();
+
+        file.open(Directory_Output_Scripts+"classes_display_2d.h");
+        for(std::string class_name : classes) {
+            file << "for(std::pair <int, " << class_name << "> > i : " << class_name << "_container) {\n"
+            << "\t" << "i.Draw2D();\n" << "}\n";
+        }
+        file.close();
     }
 };
 
