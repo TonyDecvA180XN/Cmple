@@ -20,4 +20,4 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include)
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 # Link libraries
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt)
+target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
