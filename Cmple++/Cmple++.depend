@@ -1,16 +1,6 @@
 # depslib dependency file v1.0
-1631533088 source:c:\users\hp pavilion gaming\desktop\cmple++\main.cpp
-	<iostream>
-	<vector>
-	<string>
-	<stack>
-	<set>
-	<map>
-	<fstream>
-	<sstream>
-	<windows.h>
-	<sys/types.h>
-	<dirent.h>
+1631650395 source:c:\users\hp pavilion gaming\desktop\cmple++\main.cpp
+	"FileParser.h"
 
 1617901658 c:\users\hp pavilion gaming\desktop\cmple++\include\glfw3.h
 	<stddef.h>
@@ -40,4 +30,31 @@
 	<OpenGL/glu.h>
 	<GL/gl.h>
 	<GL/glu.h>
+
+1631650478 c:\users\hp pavilion gaming\desktop\cmple++\directory.h
+	<windows.h>
+	<sys/types.h>
+	<dirent.h>
+
+1631736433 c:\users\hp pavilion gaming\desktop\cmple++\fileparser.h
+	<iostream>
+	<vector>
+	<string>
+	<stack>
+	<set>
+	<map>
+	<fstream>
+	<sstream>
+
+1631737190 source:c:\users\hp pavilion gaming\desktop\cmple++\fileparser.cpp
+	<iostream>
+	<vector>
+	<string>
+	<stack>
+	<set>
+	<map>
+	<fstream>
+	<sstream>
+	"Directory.h"
+	"FileParser.h"
 

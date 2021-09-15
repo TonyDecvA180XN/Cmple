@@ -1,46 +1,70 @@
 1. Input
 Input is a set of set of files with name <T>.cpp , accepted by the following regex:
-\s*(<Var>\s+<VarName>;\s+|<Var>\s+<VarName>\s*=\s*.*;\s+)*Create{.*}\s*Destroy{.*}\s*Update{.*}\s*Draw{.*}\s*DrawGUI{.*}\s*
+\s*(<Var>\s+<VarName>;\s+|<Var>\s+<VarName>\s*=\s*.*;\s+)*Create{.*}\s*Destroy{.*}\s*Update{.*}\s*Draw3D{.*}\s*Draw2D{.*}\s*
 Example of file:
 ________________________________
 int a = 5;
 string s;
 B aba;
-Create{
+Create {
 	a++;
 }
-Destroy{
+Destroy {
 
 }
-Update{
+Update {
 	s = "abbb";
 }
-Draw{
+Draw3D {
 
 }
-DrawGUI{
+Draw2D {
 
 }
 ________________________________
 
 2. Replacements.
-Head and footer.
+Standart header file:
 ________________________________
-class file_name{
+class class_name {
 public:
-	<file>
+	void Create();
+	void Destroy();
+	void Update();
+	void Draw3D();
+	void Draw2D();
 }
 ________________________________
 
-Replace
-Create
-to
-void Create()
-and to all other functions.
+Source file with substitutions into functions:
+________________________________
+#include "class_name.h'
+
+void class_name::Create() {
+	.*
+}
+
+void class_name::Destroy() {
+	.*
+}
+
+void class_name::Update() {
+	.*
+}
+
+void class_name::Draw3D() {
+	.*
+}
+
+void class_name::Draw2D() {
+	.*
+}
+________________________________
 
 Assume T_1, ... , T_n - names of files/classes
 Then replace <T_i> to <T_i>_typename;
-Difficult: for all variables of type <T_i> replace <t_j> to <T_i>_container[<t_j>]
+// Done : Difficult: for all variables of type <T_i> replace <t_j> to <T_i>_container[<t_j>]
+For all variables of type <T_i> replace <t_j> to <T_i>_container[<t_j>]
 
 3. Additions into internal file.
 Assume T_1, ... , T_n - names of files/classes
@@ -84,13 +108,26 @@ for(pair<int,<T_i>> i : <T_i> container){
 <T_i> create_object_<T_i>()
 void destroy_object_<T_i>()
 
-*Input functions (to be described later):
-bool mouse(MB_...)
-bool keyboard(KB_...)
-bool mouse_pressed(MB_...)
-bool keyboard_pressed(KB_...)
-bool mouse_released(MB_...)
-bool keyboard_released(KB_...)
+Input functions (to be updated later):
+bool mouse(MB_...) : returns if mouse button is pressed
+bool keyboard(KB_...) : returns if keyboard key is pressed
+bool mouse_pressed(MB_...) : returns if mouse button was pressed in this iteration
+bool keyboard_pressed(KB_...) : returns if keyboard button was pressed in this iteration
+bool mouse_released(MB_...) : returns if mouse button was released in this iteration
+bool keyboard_released(KB_...) : returns if keyboard key was released in this iteration
+MB_LEFT
+MB_RIGHT
+MB_MIDDLE
+KB_LEFT
+KB_RIGHT
+KB_UP
+KB_DOWN
+KB_ENTER
+KB_BACKSPACE
+KB_SPACE
+KB_CTRL
+KB_ALT
+KB_ESCAPE
 
 *Draw functions: (to be described later)
 void draw_model(model_type, ...)
