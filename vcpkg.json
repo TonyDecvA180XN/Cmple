@@ -3,7 +3,6 @@
 	"version-string": "0.1",
 	"dependencies":
 	[
-	  "glfw3",
-	  "glad"
+	  "glfw3"
 	]
 }
