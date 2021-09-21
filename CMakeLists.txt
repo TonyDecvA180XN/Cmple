@@ -1,14 +1,28 @@
-# Set minimum CMake version requirement
+# Set minimum CMake vesrion allowed
 cmake_minimum_required(VERSION 3.10)
 
-# Configure basic project settings: name, PL, 
+# Set global constant names
+set(PROJECT_NAME Cmple)
+set(PROJECT_CORE_NAME ${PROJECT_NAME}Core)
+set(PROJECT_TEST_NAME ${PROJECT_NAME}Test)
+
+# Config
+set(ENABLE_TESTS ON CACHE BOOL "Build tests" FORCE)
+
+# Initiate project
 project(Cmple LANGUAGES C CXX)
 
-# Declare C++ source files
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/Source/main.cpp ${PROJECT_SOURCE_DIR}/Libraries/glad/src/glad.c)
+# Add project core
+add_subdirectory(Core)
 
-# Declare C++ header files
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include ${PROJECT_SOURCE_DIR}/Libraries/glad/include)
+# Add 3rd party libraries
+if (${ENABLE_TESTS})
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+    add_subdirectory(ThirdParty/gtest)
+endif()
 
-# Set C++17 standard requirement
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+# Add tests
+if (${ENABLE_TESTS})
+    add_subdirectory(Tests)
+endif()
