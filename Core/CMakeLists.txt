@@ -12,7 +12,21 @@ target_compile_features(${PROJECT_CORE_NAME} PUBLIC cxx_std_17)
 
 # Set include paths
 target_include_directories(${PROJECT_NAME} PUBLIC ${CORE_INCLUDE})
-target_include_directories(${PROJECT_CORE_NAME} PUBLIC ${CORE_INCLUDE})
+target_include_directories(${PROJECT_CORE_NAME} PUBLIC
+    ${CORE_INCLUDE}
+    ThirdParty/glfw/include
+    ThirdParty/glad/include
+)
+
+# Set linker paths
+target_link_directories(${PROJECT_CORE_NAME} PUBLIC
+    ThirdParty/glfw
+    ThirdParty/glad
+)
 
 # Link core and runtime launcher
-target_link_libraries(${PROJECT_NAME} ${PROJECT_CORE_NAME})
+target_link_libraries(${PROJECT_NAME} PUBLIC
+    ${PROJECT_CORE_NAME}
+    glfw
+    glad
+)

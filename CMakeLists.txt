@@ -16,6 +16,9 @@ project(Cmple LANGUAGES C CXX)
 add_subdirectory(Core)
 
 # Add 3rd party libraries
+find_package(OpenGL REQUIRED)
+add_subdirectory(ThirdParty/glfw)
+add_subdirectory(ThirdParty/glad)
 if (${ENABLE_TESTS})
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
     set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
