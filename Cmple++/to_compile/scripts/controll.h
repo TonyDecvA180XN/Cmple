@@ -1,8 +1,13 @@
+#ifndef CONTROLL_H_INCLUDED
+#define CONTROLL_H_INCLUDED
+
+#include "classes_implementation.h"
+
 class controll {
 public:
 
 	int Time;
-	player my_player;
+	player_typename my_player;
 	
 	void Create();
 	
@@ -10,6 +15,10 @@ public:
 	
 	void Update();
 	
-	void Draw();
+	void Draw3D();
 	
-}
+	void Draw2D();
+	
+};
+
+#endif // CONTROLL_H_INCLUDED

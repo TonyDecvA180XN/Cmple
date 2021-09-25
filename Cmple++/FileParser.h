@@ -19,16 +19,17 @@ public:
 private:
     std::set < std::string > classes;
 
-    std::vector < std::string > split_data(std::string data);
+    std::deque < std::string > split_data(std::string data);
 
     void parse_file(std::string file_name);
 
-    std::vector < std::string > parse_strings_header(std::vector < std::string > split, std::string class_name);
-    std::vector < std::string > parse_strings_source(std::vector < std::string > split, std::string class_name);
+    std::deque < std::string > parse_strings_header(std::deque < std::string > split, std::string class_name);
+    std::deque < std::string > parse_strings_source(std::deque < std::string > split, std::string class_name);
 
     void create_include_files();
 
-    void create_classes_implementation_files();
+    void create_classes_implementation_header_files();
+    void create_classes_implementation_source_files();
     void create_classes_update_files();
     void create_classes_display_3d_files();
     void create_classes_display_2d_files();

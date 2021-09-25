@@ -31,12 +31,12 @@
 	<GL/gl.h>
 	<GL/glu.h>
 
-1631650478 c:\users\hp pavilion gaming\desktop\cmple++\directory.h
+1632502798 c:\users\hp pavilion gaming\desktop\cmple++\directory.h
 	<windows.h>
 	<sys/types.h>
 	<dirent.h>
 
-1631736433 c:\users\hp pavilion gaming\desktop\cmple++\fileparser.h
+1632501504 c:\users\hp pavilion gaming\desktop\cmple++\fileparser.h
 	<iostream>
 	<vector>
 	<string>
@@ -46,9 +46,10 @@
 	<fstream>
 	<sstream>
 
-1631737190 source:c:\users\hp pavilion gaming\desktop\cmple++\fileparser.cpp
+1632502858 source:c:\users\hp pavilion gaming\desktop\cmple++\fileparser.cpp
 	<iostream>
 	<vector>
+	<deque>
 	<string>
 	<stack>
 	<set>

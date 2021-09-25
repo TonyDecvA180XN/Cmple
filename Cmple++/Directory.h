@@ -17,7 +17,7 @@ const std::string Directory_Search_Output_Scripts = "to_compile\\scripts\\*";
 const std::string Directory_Search_Const_Scripts  = "const_input\\scripts\\*";
 const std::string Directory_Current  = ".";
 const std::string Directory_Previous = "..";
-const std::set < std::string > Function = {"Create", "Destroy", "Update", "Draw"};
+const std::set < std::string > Function = {"Create", "Destroy", "Update", "Draw3D", "Draw2D"};
 
 std::vector < std::string > find_files_in_directory(std::string directory) {
 #ifdef _WIN32
@@ -54,7 +54,11 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
 }
 
 bool is_letter(char c) {
-    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '_');
+    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
+}
+
+bool is_letter_or_digit(char c) {
+    return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_');
 }
 
 bool is_space(char c) {
@@ -72,6 +76,15 @@ bool is_space(std::string str) {
 
 bool is_cpp(std::string str) {
     return (str.size() >= 4 && str.substr(str.size()-4) == ".cpp");
+}
+
+std::string to_upper(std::string str){
+    for(char &c : str){
+        if(c>='a' && c<='z'){
+            c+='A'-'a';
+        }
+    }
+    return str;
 }
 
 std::string remove_extension(std::string file_name) {
