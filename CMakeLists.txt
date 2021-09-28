@@ -1,23 +1,31 @@
-# Set minimum CMake version requirement
+# Set minimum CMake vesrion allowed
 cmake_minimum_required(VERSION 3.10)
 
-# Setup vcpkg script with CMake (note: should be placed before project() call)
-set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
+# Set global constant names
+set(PROJECT_NAME Cmple)
+set(PROJECT_CORE_NAME ${PROJECT_NAME}Core)
+set(PROJECT_TEST_NAME ${PROJECT_NAME}Test)
 
-# Configure basic project settings: name, PL, 
+# Config
+set(ENABLE_TESTS ON CACHE BOOL "Build tests" FORCE)
+
+# Initiate project
 project(Cmple LANGUAGES C CXX)
 
-# Install fmt library
-find_package(fmt REQUIRED)
+# Add project core
+add_subdirectory(Core)
 
-# Declare C++ source files
-add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/Source/main.cpp)
+# Add 3rd party libraries
+find_package(OpenGL REQUIRED)
+add_subdirectory(ThirdParty/glfw)
+add_subdirectory(ThirdParty/glad)
+if (${ENABLE_TESTS})
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    set(BUILD_GMOCK OFF CACHE BOOL "" FORCE)
+    add_subdirectory(ThirdParty/gtest)
+endif()
 
-# Declare C++ header files
-target_include_directories(${PROJECT_NAME} PUBLIC ${PROJECT_SOURCE_DIR}/Include)
-
-# Set C++17 standard requirement
-target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
-
-# Link libraries
-target_link_libraries(${PROJECT_NAME} PUBLIC fmt::fmt-header-only)
+# Add tests
+if (${ENABLE_TESTS})
+    add_subdirectory(Tests)
+endif()
