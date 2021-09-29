@@ -4,7 +4,6 @@ player my_player;
 Create{
     my_player& = create_object_player();
     player nnn;
-    nnn.data++;
     Time = 0;
 }
 
@@ -15,7 +14,7 @@ Destroy{
 Update{
     Time += 1;
     if(rand()%10 == 0)
-        my_player.x += 10;
+        my_player->x += 10;
 }
 
 Draw3D{
