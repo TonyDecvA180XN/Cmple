@@ -27,13 +27,13 @@ Graphical features are supported for windows creation, basic rendering, input pr
 ## Repository structure ##
 Cmple project is implemented in C++. The directory structure follows universal CMake pattern:
 
-	/Build          Binary & Intermediate files (by CMake)
-    /Core		    Cmple source code
-        /Include    Header public files
-        /Source     Source code private files
-	/ThirdParty 	Third-party libraries
-	/Tests		    Test subproject
-	/Examples	    Example project inputs & outputs
+	/Build			Binary & Intermediate files (by CMake)
+	/Core			Cmple source code
+		/Include	Header public files
+		/Source		Source code private files
+	/ThirdParty		Third-party libraries
+	/Tests			Test subproject
+	/Examples		Example project inputs & outputs
 
 
 ## Features ##
@@ -55,14 +55,14 @@ Prerequisites:
 - Git version 2.22 or newer
 - CMake version 3.15 or newer
 - C++ build environment as one of:
-    - Visual Studio 2019 with all following options:
-        - Desktop Development for C++
-        - C++ CMake tools for Windows
-        - Test Adapter for Google Test (for tests)
-        - C++ Clang tools for Windows (optional)
-        - LLVM suite for ClangCL builds (optional)
-    - MingGW64
-        - LLVM suite for Clang builds (optional)
+	- Visual Studio 2019 with all following options:
+		- Desktop Development for C++
+		- C++ CMake tools for Windows
+		- Test Adapter for Google Test (for tests)
+		- C++ Clang tools for Windows (optional)
+		- LLVM suite for ClangCL builds (optional)
+	- MingGW64
+		- LLVM suite for Clang builds (optional)
 
 First, download the repository with the following command:
 ```
@@ -115,8 +115,8 @@ Every time you need to change compiler suite or your project structure is messed
 Build process relies on CMake, so make sure all your desired compile environment are visible to it. You can check available generators by running `cmake --help` and examining the trailing section.
 
 To build the project you need run appropriate batch script, as for Unix, one of the:
-- `Build-Linux-Clang.bat` for Clang compiler with GCC build system
-- `Build-Linux-GCC.bat` for GCC compiler
+- `bash Build-Linux-Clang.sh` for Clang compiler with GCC build system
+- `bash Build-Linux-GCC.sh` for GCC compiler
 
 First build takes a lot time since it has to build all the libraries included in project.
 
