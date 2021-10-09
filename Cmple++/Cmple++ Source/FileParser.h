@@ -14,7 +14,7 @@ class FileParser {
 public:
     FileParser(int argc, char** argv);
 
-    bool parse();
+    void parse();
 
 private:
 
@@ -52,7 +52,8 @@ private:
     void create_classes_update_files();
     void create_classes_display_3d_files();
     void create_classes_display_2d_files();
-    void create_files_load_files();
+    void create_files_load();
+    void create_files_audio_load();
     void copy_const_input();
     void create_bat_file();
 };

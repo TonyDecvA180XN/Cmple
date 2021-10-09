@@ -14,7 +14,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
         FindClose(hl);
     }
     else {
-        std::cerr << "Error: could not open directory " << directory << std::endl;
+        throw "Error: could not open directory " + directory;
     }
     return file_list;
 #endif // _WIN32
@@ -28,7 +28,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
         }
     }
     else {
-        std::cerr << "Error: could not open directory " << directory << std::endl;
+        throw "Error: could not open directory " + directory;
     }
     return file_list;
 #endif // __unix__
@@ -41,7 +41,7 @@ void copy_directory(std::string from, std::string to) {
     system(comand.c_str());
 #endif // __WIN32
 #ifdef __unix__
-    std::cerr << "Suffering OS" << std::endl;
+
 #endif // __unix__
 }
 
@@ -50,13 +50,13 @@ void clean_directory(std::string path) {
     std::string comand;
     comand = "del " + path + " /S /Q >NUL";
     system(comand.c_str());
-    comand = "rmdir " + path + " /S /Q";
+    comand = "rmdir " + path + " /S /Q >NUL";
     system(comand.c_str());
-    comand = "mkdir " + path;
+    comand = "mkdir " + path + " >NUL";
     system(comand.c_str());
 #endif // __WIN32
 #ifdef __unix__
-    std::cerr << "Suffering OS" << std::endl;
+
 #endif // __unix__
 }
 

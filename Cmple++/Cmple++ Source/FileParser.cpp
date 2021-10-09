@@ -32,7 +32,7 @@ void FileParser::process_arguments(int argc, char** argv) {
         if (command.size() >= 12 && command.substr(0, 11) == "to_compile=") {
             directory_input = command.substr(11);
         }
-        if (command == "gcc_create_bat") {
+        if (command == "gcc_create_batch") {
             gcc_create_bat = true;
         }
         if (command == "gcc_auto_execute") {
@@ -41,7 +41,7 @@ void FileParser::process_arguments(int argc, char** argv) {
     }
 }
 
-bool FileParser::parse() {
+void FileParser::parse() {
     try {
         copy_const_input();
 
@@ -59,24 +59,23 @@ bool FileParser::parse() {
 
         if (gcc_create_bat || gcc_auto_execute)
             create_bat_file();
+
+#ifdef __WIN32
+        if (gcc_auto_execute) {
+            std::string command;
+            command = "cd " + directory_to_compile + " & compile.bat";
+            std::system(command.c_str());
+            command = "cd " + directory_to_compile + " & program.exe";
+            std::system(command.c_str());
+        }
+#endif // __WIN32
+
+        std::cout << "Successful parsing" << std::endl;
     }
     catch (char const* err) {
         std::cerr << err << std::endl;
-        return false;
+        std::cout << "Unsuccessful parsing" << std::endl;
     }
-
-#ifdef __WIN32
-    if (gcc_auto_execute) {
-
-        std::string command;
-        command = "cd " + directory_to_compile + " & compile.bat";
-        std::system(command.c_str());
-        command = "cd " + directory_to_compile + " & program.exe";
-        std::system(command.c_str());
-    }
-#endif // __WIN32
-
-    return true;
 }
 
 void FileParser::read_input_classes() {
@@ -322,7 +321,8 @@ void FileParser::create_include_files() {
     create_classes_update_files();
     create_classes_display_3d_files();
     create_classes_display_2d_files();
-    create_files_load_files();
+    create_files_load();
+    create_files_audio_load();
 }
 
 void FileParser::create_classes_implementation_header_files() {
@@ -371,12 +371,12 @@ void FileParser::create_classes_implementation_header_files() {
     file << "\n";
 
     for (std::string class_name : classes) {
-        file << "int create_object_" << class_name << "();\n";
+        file << class_name << "_typename create_object_" << class_name << "();\n";
     }
     file << "\n";
 
     for (std::string class_name : classes) {
-        file << "void destroy_object_" << class_name << "(int);\n";
+        file << "void destroy_object_" << class_name << "(" << class_name << "_typename num);\n";
     }
     file << "\n";
 
@@ -422,7 +422,7 @@ void FileParser::create_classes_implementation_source_files() {
     file << "\n";
 
     for (std::string class_name : classes) {
-        file << "int create_object_" << class_name << "() {\n"
+        file << class_name << "_typename create_object_" << class_name << "() {\n"
             << "\t" << class_name << " *object = new " << class_name << ";\n"
             << "\t" << class_name << "_container[" << class_name << "_objects_number] = object;\n"
             << "\t" << class_name << "_container[" << class_name << "_objects_number]->Create();\n"
@@ -430,7 +430,7 @@ void FileParser::create_classes_implementation_source_files() {
     }
 
     for (std::string class_name : classes) {
-        file << "void destroy_object_" << class_name << "(int num) {\n"
+        file << "void destroy_object_" << class_name << "(" << class_name << "_typename num) {\n"
             << "\t" << class_name << "_container[num]->Destroy();\n"
             << "\t" << class_name << "_container.erase(num);\n" << "}\n\n";
     }
@@ -468,7 +468,7 @@ void FileParser::create_classes_display_2d_files() {
     file.close();
 }
 
-void FileParser::create_files_load_files() {
+void FileParser::create_files_load() {
     std::ofstream file;
     file.open(directory_to_compile + "\\" + "files_load.h");
 
@@ -481,6 +481,13 @@ void FileParser::create_files_load_files() {
         file << model_name << ".Load(\"" << Directory_Models + "\\" + "\\" + model_name + ".obj" << "\");\n";
     }
     file << "\n";
+
+    file.close();
+}
+
+void FileParser::create_files_audio_load() {
+    std::ofstream file;
+    file.open(directory_to_compile + "\\" + "files_audio_load.h");
 
     for (std::string sound_name : sounds) {
         file << sound_name << ".Load(\"" << Directory_Sounds + "\\" + "\\" + sound_name + sounds_extensions[sound_name] << "\");\n";
@@ -541,6 +548,6 @@ void FileParser::create_bat_file() {
     file_out.close();
 #endif // __WIN32
 #ifdef __unix__
-    std::cerr << "Suffering OS" << std::endl;
+
 #endif // __unix__
 }

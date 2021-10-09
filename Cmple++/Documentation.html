@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>
+            Cmple++ Documentation
+        </title>
+    </head>
+
+    <body>
+        <header>
+            <h1 class="page-title">
+                Cmple++ Documentation
+            </h1>
+
+            <p><a href="https://github.com/TonyDecvA180XN/Cmple/tree/main">GitHub</a></p>
+
+            <p>
+                Authors:
+                <ul>
+                    <li>Anton Dospekhov</li>
+                    <li>Igor Parfenov</li>
+                </ul>
+            </p>
+
+            <p>Last update 09.10.2021</p>
+        </header>
+
+        <main>
+            <div>
+                <h2 id="Navigation">Navigation</h2>
+                <ol>
+                    <li>
+                        <a href="#Specification">Specification</a>
+                        <ol>
+                            <li>
+                                <a href="#Description">Description</a>
+                                <ol>
+                                    <li><a href="#How to use it">How to use it</a></li>
+                                    <li><a href="#Execution flags">Execution flags</a></li>
+                                    <li><a href="#Supported operating systems and compilers">Supported operating systems and compilers</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Input format">Input format</a>
+                                <ol>
+                                    <li><a href="#User input directory">User input directory</a></li>
+                                    <li><a href="#Class scripts">Class scripts</a></li>
+                                    <li><a href="#Creation code script">Creation code script</a></li>
+                                    <li><a href="#Sprites">Sprites</a></li>
+                                    <li><a href="#Models">Models</a></li>
+                                    <li><a href="#Sounds">Sounds</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Parser">Parser</a>
+                                <ol>
+                                    <li><a href="#Class type">Class type</a></li>
+                                    <li><a href="#Class API">Class API</a></li>
+                                    <li><a href="#Input file parsing">Input file parsing</a></li>
+                                    <li><a href="#Include files">Include files</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Engine">Engine</a>
+                                <ol>
+                                    <li><a href="#Graphic libraries">Graphic libraries</a></li>
+                                    <li><a href="#Graphic model">Graphic model</a></li>
+                                    <li><a href="#Audio">Audio</a></li>
+                                    <li><a href="#Resource support">Resource support</a></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+
+                    <li>
+                        <a href="#API">API</a>
+                        <ol>
+                            <li>
+                                <a href="#Keyboard">Keyboard</a>
+                                <ol>
+                                    <li><a href="#Keyboard key type">Keyboard key type</a></li>
+                                    <li><a href="#Function keyboard">Function keyboard</a></li>
+                                    <li><a href="#Function keyboard_pressed">Function keyboard_pressed</a></li>
+                                    <li><a href="#Function keyboard_released">Function keyboard_released</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Mouse">Mouse</a>
+                                <ol>
+                                    <li><a href="#Mouse button type">Mouse button type</a></li>
+                                    <li><a href="#Function mouse">Function mouse</a></li>
+                                    <li><a href="#Function mouse_pressed">Function mouse_pressed</a></li>
+                                    <li><a href="#Function mouse_released">Function mouse_released</a></li>
+                                    <li><a href="#Function mouse_x">Function mouse_x</a></li>
+                                    <li><a href="#Function mouse_y">Function mouse_y</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Program control">Program control</a>
+                                <ol>
+                                    <li><a href="#Function set_resolution">Function set_resolution</a></li>
+                                    <li><a href="#Function set_window_name">Function set_window_name</a></li>
+                                    <li><a href="#Function set_frame_per_second">Function set_frame_per_second</a></li>
+                                    <li><a href="#Function end_program">Function end_program</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Camera">Camera</a>
+                                <ol>
+                                    <li><a href="#Function set_camera_position_by_look_at">Function set_camera_position_by_look_at</a></li>
+                                    <li><a href="#Function set_camera_position_by_angles">Function set_camera_position_by_angles</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Light">Light</a>
+                                <ol>
+                                    <li><a href="#Function set_exposure">Function set_exposure</a></li>
+                                    <li><a href="#Function set_directional_light_direction">Function set_directional_light_direction</a></li>
+                                    <li><a href="#Function set_directional_light_color">Function set_directional_light_color</a></li>
+                                    <li><a href="#Function set_point_light_position">Function set_point_light_position</a></li>
+                                    <li><a href="#Function set_point_light_color">Function set_point_light_color</a></li>
+                                    <li><a href="#Function set_spot_light_position">Function set_spot_light_position</a></li>
+                                    <li><a href="#Function set_spot_light_color">Function set_spot_light_color</a></li>
+                                    <li><a href="#Function set_spot_light_direction">Function set_spot_light_direction</a></li>
+                                    <li><a href="#Function set_spot_light_angle">Function set_spot_light_angle</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Render">Render</a>
+                                <ol>
+                                    <li><a href="#Font type">Font type</a></li>
+                                    <li><a href="#Function draw_text">Function draw_text</a></li>
+                                    <li><a href="#Function draw_sprite">Function draw_sprite</a></li>
+                                    <li><a href="#Function draw_model">Function draw_model</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
+                                <a href="#Sound">Sound</a>
+                                <ol>
+                                    <li><a href="#Function sound_play">Function sound_play</a></li>
+                                    <li><a href="#Function sound_stop">Function sound_stop</a></li>
+                                    <li><a href="#Function sound_is_playing">Function sound_is_playing</a></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+
+            <div>
+                <div>
+                    <h2 id="Specification">1. Specification</h2>
+
+                    <div>
+                        <h3 id="Description">1.1 Description</h2>
+
+                        <p>
+                            The main purpose of <b>Cmple++</b> program is to facilitate writing programs using graphics and interaction API-s. The program abstract the internal API-s and the architecture from user and present the unified API for all his purposes.
+                        </p>
+
+                        <h4 id="How to use it">1.1.1. How to use it</h3>
+                        <p>
+                            The <b>Cmple++</b> program expects as input three directories:
+                            <ol>
+                                <li><b>User input directory</b>. User writes a program in <b>User input directory</b>. The structure of the program is described <a href="#Input format">here</a>.</li>
+                                <li><b>Internal input directory</b>. The <b>Internal input directory</b> has to be downloaded with the <b>Cmple++</b> program. Make sure to download the correct version.</li>
+                                <li><b>Output directory</b>. The resulting project files will be saved in <b>Output directory</b>.</li>
+                            </ol>
+                            After successful parsing the user will have the source code and all resource files in <b>Output directory</b>. It is his decision how to compile it. There are following ways:
+                            <ul>
+                                <li>If user works and has <b>GNU GCC 64-bit</b> compiler, he can use corresponding integrated execution flags.</li>
+                                <li>Otherwise user can use <b>CMake</b> to configure the project file for some IDE</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Execution flags">1.1.2. Execution flags</h3>
+                        <p>
+                            The <b>Cmple++</b> program supports some set of execution arguments.
+                            <ol>
+                                <li><b>input=&ltdirectory&gt</b>. This flag specifies the <b>User input directory</b>. By default it is <b>input</b></li>
+                                <li><b>const_input=&ltdirectory&gt</b>. This flag specifies the <b>Internal input directory</b>. By default it is <b>const_input</b></li>
+                                <li><b>to_compile=&ltdirectory&gt</b>. This flag specifies the <b>Output directory</b>. By default it is <b>to_compile</b></li>
+                                <li><b>gcc_create_batch</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler.</li>
+                                <li><b>gcc_auto_execute</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler and execute it. </li>
+                            </ol>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Supported operating systems and compilers">1.1.3. Supported operating systems and compilers</h3>
+                        <p>
+                            The <b>Cmple++</b> supports following compilers:
+                            <ul>
+                                <li>GNU GCC</li>
+                                <li>Visual C++</li>
+                                <li>Clang</li>
+                            </ul>
+                            Only 64-bit compilers are supported.
+                            The <b>Cmple++</b> supports following operating systems:
+                            <ul>
+                                <li>Windows</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Input format">1.2. Input format</h2>
+
+                        <p>
+                            This is the description of input. Read it before starting using <b>Cmple++</b>
+                        </p>
+
+                        <h4 id="User input directory">1.2.1. User input directory</h3>
+                        <p>
+                            The <b>user input directory</b> has to contain following folders:
+                            <ul>
+                                <li>scripts</li>
+                                <li>sprites</li>
+                                <li>models</li>
+                                <li>sounds</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Class scripts">1.2.2. Class scripts</h3>
+                        <p>
+                            Each file <b>&ltname&gt.cpp</b> represents the class <b>name</b>. It has to be placed in <b>scripts</b> subdirectory. The file has to contain the following function:
+                            <ul>
+                                <li>Create. This function is called once object is created.</li>
+                                <li>Destroy. This function is called once object is destroyed.</li>
+                                <li>Update. This function is called while each update iteration.</li>
+                                <li>Draw3D. This function is called while each render 3D iteration. This is the only place, where user can call functions related to 3D rendering.</li>
+                                <li>Draw2D. This function is called while each render 2D iteration. This is the only place, where user can call functions related to 2D rendering.</li>
+                            </ul>
+                            These function are written in form <b>&ltfunction&gt {...}</b>. No other functions has to be written. Also file may contain class variables. All code except the function declarations has to be written in accordance to <b>C++ standard</b>. View example to make it more clear.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Creation code script">1.2.3. Creation code script</h3>
+                        <p>
+                            <b>Creation code script</b> is a file <b>creation_code.cpp</b>, which has to be in <b>scripts</b> subdirectory. In comparison to class files, it can't contain functions, but can contain local variables. This script is executed at start of program and has to be used, to create objects of classes. This is the only place, where user can change the name and resolution of window.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Sprites">1.2.4. Sprites</h3>
+                        <p>
+                            Sprite has to be placed in <b>sprites</b> subdirectory. It can have one of following extensions:
+                            <ul>
+                                <li>.jpg</li>
+                                <li>.png</li>
+                                <li>.bmp</li>
+                                <li>.tga</li>
+                            </ul>
+                            There might be also undocumented support for some other extensions.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Models">1.2.5. Models</h3>
+                        <p>
+                            Model has to be placed in <b>models</b> subdirectory. It can have only <b>.obj</b> extension. The <b>.obj</b> specification is supported only partially. Also there are some <b>.obj</b> features, which can be successfully read, but can't be used in rendering due to simple graphics engine. <b>Important</b>: some models, downloaded from the Internet, have absolute paths to components. In this case, user has to deal with it by his own.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Sounds">1.2.6. Sounds</h3>
+                        <p>
+                            Sound has to be placed in <b>sounds</b> subdirectory. It can have one of following extensions:
+                            <ul>
+                                <li>.mp3</li>
+                                <li>.ogg</li>
+                                <li>.wav</li>
+                                <li>.tga</li>
+                            </ul>
+                            There might be also undocumented support for some other extensions. Note: the loading of <b>.mp3</b> and <b>.ogg</b> extensions is relatively slow.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Parser">1.3. Parser</h2>
+
+                        <p>
+                            This is advanced explanation of algorithm used in parser. It is not obligatory to know it to start using <b>Cmple++</b>.
+                        </p>
+
+                        <h4 id="Class type">1.3.1. Class type</h3>
+                        <p>
+                            <b>Cmple++</b> introduces the following for every class in files <b>classes_implementation.h</b> and <b>classes>implementation.cpp</b>:
+                            <ul>
+                                <li><b>using &ltclass_name&gt_typename = int;</b></li>
+                                <li><b>std::map&ltint, &ltclass_name&gt*&gt &ltclass_name&gt_contaner;</b></li>
+                                <li><b>int &ltclass_name&gt_object_number = 0;</b></li>
+                            </ul>
+                            Every class type variable is parsed into type <b>&ltclass_name&gt_typename</b>. If after a class <b>&ltclass_name&gt</b> variable <b>&ltvar&gt</b> there is <b>&</b>, then these units are parsed to <b>&ltclass_name&gt_container[&ltvar&gt]-&gt</b>.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Class API">1.3.2. Class API</h3>
+                        <p>
+                            <b>Cmple++</b> introduces the following for every class in files <b>classes_implementation.h</b> and <b>classes>implementation.cpp</b>:
+                            <ul>
+                                <li><b>&ltclass_name&gt_typename create_object_&ltclass_name&gt();</b> This function allocates new object of class <b>&ltclass_name&gt</b> and returns it id.</li>
+                                <li><b>void destroy_object_&ltclass_name&gt(&ltclass_name&gt_typename);</b> This function deallocated the object of class <b>&ltclass_name&gt</b> with given id. This id will never be given to any new allocated object of this class.</li>
+                            </ul>
+                            These functions are used to create and destroy objects of user classes.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Input file parsing">1.3.3. Input file parsing</h3>
+                        <p>
+                            Input file has to contain a corresponding class. This class should not be declared as usual. Instead, the file has to contain variables and function in global scope. Only following functions has to be int file:
+                            <ul>
+                                <li>Create</li>
+                                <li>Destroy</li>
+                                <li>Update</li>
+                                <li>Draw3D</li>
+                                <li>Draw2D</li>
+                            </ul>
+                            This function has to be declared in form <b>&ltfunction&gt {...}</b>. Also all access to variables of objects has to be done through operator <b>&</b> instead of <b>.</b> of <b>-&gt</b>, as they has to be operated as class variables. The parser detects the scope of variables while checking, if a variable has a class type. There are no other restrictions, and the code has to be written in accordance to <b>C++ specification</b>. The parser creates both <b>source</b> and <b>header</b> files. There also has to be a <b>creation_code.cpp</b> file in <b>user input directory</b>. This code is parsed as a single function and can't have any function in it.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Include files">1.3.4. Output scripts</h3>
+                        <p>
+                            The parser create the following set of files in <b>output directory</b>:
+                            <ul>
+                                <li><b>&ltclass_name&gt.cpp</b> - the source file for every input class, which is compiled separately.</li>
+                                <li><b>&ltclass_name&gt.h</b> - the header file for every input class, which is compiled separately.</li>
+                                <li><b>creation_code.h</b> - the header file for creation code file, which is including in corresponding place.</li>
+                                <li><b>classes_implementation.cpp</b> - the source file with API of input classes, which is compiled separately.</li>
+                                <li><b>classes_implementation.h</b> - the header file with API of input classes, which is compiled separately.</li>
+                                <li><b>files_load.h</b> - the header file with loading sprites and models, which is including in corresponding place.</li>
+                                <li><b>files_load_audio.h</b> - the header file with loading sounds, which is including in corresponding place.</li>
+                                <li><b>files_update.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
+                                <li><b>files_display3d.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
+                                <li><b>files_display2d.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Engine">1.4. Engine</h2>
+
+                        <p>
+                            This is advanced explanation of algorithm used in parser. It is not obligatory to know it to start using <b>Cmple++</b>.
+                        </p>
+
+                        <h4 id="Graphic libraries">1.4.1. Graphic libraries</h3>
+                        <p>
+                            The engine renders using <a href="https://www.khronos.org/registry/OpenGL/specs/gl/glspec33.core.pdf">OpenGL version 3.3 core profile</a>. It also uses following libraries:
+                            <ul>
+                                <li><a href="https://www.glfw.org/">GLFW</a> for using operation system API for creating windows and checking input.</li>
+                                <li><a href="https://glad.dav1d.de/">GLAD</a> as a loading library.</li>
+                                <li><a href="https://github.com/nothings/stb">stb_image</a> for loading images.</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Graphic model">1.4.2. Graphic model</h3>
+                        <p>
+                            The engine uses following technics:
+                            <ul>
+                                <li><a href="https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_reflection_model">Blinn-Phong reflection model</a></li>
+                                <li><a href="https://ru.wikipedia.org/wiki/High_Dynamic_Range_Imaging">High Dynamic Range Imaging (HDR)</a></li>
+                                <li><a href="https://en.wikipedia.org/wiki/Gamma_correction">Gamma Correction</a></li>
+                            </ul>
+                            Also engine supports following types of lights:
+                            <ul>
+                                <li>Directional light</li>
+                                <li>Point light</li>
+                                <li>Spot light</li>
+                            </ul>
+                            The engine supports as a material only the <b>diffuse map</b>.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Audio">1.4.3. Audio</h3>
+                        <p>
+                            The engine uses <a href="http://audiere.sourceforge.net/">Audiere</a> for audio processing.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Resource support">1.4.4. Resource support</h3>
+                        <p>
+                            The engine has following classes for support the input resources:
+                            <ul>
+                                <li><b>Sprite</b>. Loads image using <a href="#Graphic libraries">stb_image</a> and renders it.</li>
+                                <li><b>Model</b>. Loads <b>.obj</b> model with using self-written parser and renders it.</li>
+                                <li><b>Sound</b>. Loads sound using <a href="#Audio">Audiere</a> parser and calls it to play the sound.</li>
+                                <li><b>Shader</b>. Loads vertex, fragment and geometric shaders written on <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)">GLSL version 330</a></li>
+                                <li><b>Font</b>. Loads <b>.fnt</b> font using self-written parser and <a href="#Graphic libraries">stb_image</a> and renders it. </li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 id="API">2. API</h2>
+
+                    <div>
+                        <h3 id="Keyboard">2.1. Keyboard</h2>
+
+                        <h4 id="Keyboard key type">2.1.1. Keyboard key type</h3>
+                        <p>
+                            The keyboard keys have type <b>cmple_keyboard_key</b> and defined in form <b>KB_&ltkey&gt</b>. Example: <b>KB_SPACE</b>.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function keyboard">2.1.2. Function keyboard</h3>
+                        <p>
+                            bool keyboard(cmple_keyboard_key key); The function returns if the key is pressed.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function keyboard_pressed">2.1.3. Function keyboard_pressed</h3>
+                        <p>
+                            bool keyboard_pressed(cmple_keyboard_key key); The function returns if the key was currently pressed.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function keyboard_released">2.1.4. Function keyboard_released</h3>
+                        <p>
+                            bool keyboard_released(cmple_keyboard_key key); The function returns if the key was currently released.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Mouse">2.2. Mouse</h2>
+
+                        <h4 id="Mouse button type">2.2.1. Mouse button type</h3>
+                        <p>
+                            The mouse buttons have type <b>cmple_mouse_button</b> and defined in form <b>MB_&ltkey&gt</b>. Example: <b>MB_LEFT</b>.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function mouse">2.2.2. Function mouse</h3>
+                        <p>
+                            bool mouse(cmple_mouse_button button); The function returns if the button is pressed.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function mouse_pressed">2.2.3. Function mouse_pressed</h3>
+                        <p>
+                            bool mouse_pressed(cmple_mouse_button button); The function returns if the button was currently pressed.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function mouse_released">2.2.4. Function mouse_released</h3>
+                        <p>
+                            bool mouse_released(cmple_mouse_button button); The function returns if the button was currently released.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function mouse_x">2.2.5. Function mouse_x</h3>
+                        <p>
+                            int mouse_x(); The function returns the x coordinate of cursor in pixels relative to upper left corner of window.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function mouse_y">2.2.6. Function mouse_y</h3>
+                        <p>
+                            int mouse_y(); The function returns the y coordinate of cursor in pixels relative to upper left corner of window.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Program control">2.3. Program control</h2>
+
+                        <h4 id="Function set_resolution">2.3.1. Function set_resolution</h3>
+                        <p>
+                            void set_resolution(unsigned int width, unsigned int height); The function sets the sizes of window to width and height. The function has to be called in creation code or in Create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_window_name">2.3.2. Function set_window_name</h3>
+                        <p>
+                            void set_window_name(std::string name); The function sets the title of window to name. The function has to be called in creation code or in create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_frame_per_second">2.3.3. Function set_frame_per_second</h3>
+                        <p>
+                            void set_frame_per_second(double fps); The function sets the frame per second of program to fps. By default the fps is 100.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function end_program">2.3.4. Function end_program</h3>
+                        <p>
+                            void end_program(); The function ends program at end current iteration. <b>Important</b>: this function does not call Destroy function of objects.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Camera">2.4. Camera</h2>
+
+                        <h4 id="Function set_camera_position_by_look_at">2.4.1. Function set_camera_position_by_look_at</h3>
+                        <p>
+                            void set_camera_position_by_look_at(float posX, float posY, float posZ, float targetX, float targetY, float targetZ); The function sets the position of camera such that it is in point (posX, posY, posZ), looks at point (targetX, targetY, targetZ) and its upper vector is (0, 1, 0).
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_camera_position_by_angles">2.4.2. Function set_camera_position_by_angles</h3>
+                        <p>
+                            void set_camera_position_by_angles(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch); The function sets the position of camera such that it is in point (posX, posY, posZ) and has corresponding upper vector, pitch and yaw.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Light">2.5. Light</h2>
+
+                        <h4 id="Function set_exposure">2.5.1. Function set_exposure</h3>
+                        <p>
+                            void set_exposure(float exposure); The function sets the exposure of light. By default it is recommended to use exposure = 1. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_directional_light_direction">2.5.2. Function set_directional_light_direction</h3>
+                        <p>
+                            void set_directional_light_direction(float dirX, float dirY, float dirZ); The function sets the direction of directional light to (dirX, dirY, dirZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_directional_light_color">2.5.3. Function set_directional_light_color</h3>
+                        <p>
+                            void set_directional_light_color(float colorRed, float colorGreen, float colorBlue); The function sets the color of directional light to (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_point_light_position">2.5.4. Function set_point_light_position</h3>
+                        <p>
+                            void set_point_light_position(int index, float posX, float posY, float posZ); The function sets the position of point light with corresponding index to (posX, posY, posZ). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_point_light_color">2.5.5. Function set_point_light_color</h3>
+                        <p>
+                            void set_point_light_color(int index, float colorRed, float colorGreen, float colorBlue); The function sets the color of point light with corresponding index to (colorRed, colorGreen, colorBlue). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_position">2.5.6. Function set_spot_light_position</h3>
+                        <p>
+                            void set_spot_light_position(float posX, float posY, float posZ); The function sets the position of spot light to (posX, posY, posZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_color">2.5.7. Function set_spot_light_color</h3>
+                        <p>
+                            void set_spot_light_color(float colorRed, float colorGreen, float colorBlue); The function sets the color of spot light to (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_direction">2.5.8. Function set_spot_light_direction</h3>
+                        <p>
+                            void set_spot_light_direction(float dirX, float dirY, float dirZ); The function sets the direction of spot light to (dirX, dirY, dirZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_angle">2.5.9. Function set_spot_light_angle</h3>
+                        <p>
+                            void set_spot_light_angle(float cutOff, float outerCutOff); The function sets the angles of full intensity and decreasing from full to zero intencity of spot light to cutOff and outerCutOff. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Render">2.6. Render</h2>
+
+                        <h4 id="Font type">2.6.1. Font type</h3>
+                        <p>
+                            The font have type <b>cmple_font</b> and defined in form <b>FT_&ltfont&gt</b>. Only 3 fonts are available:
+                            <ul>
+                                <li>FT_ARIAL</li>
+                                <li>FT_CALIBRI</li>
+                                <li>FT_TIMES_NEW_ROMAN</li>
+                            </ul>
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function draw_text">2.6.2. Function draw_text</h3>
+                        <p>
+                            void draw_text(std::string text, cmple_font font, float posX, float posY, float angleRotate, float scaleX, float scaleY, float colorRed, float colorGreen, float colorBlue); The function renders the given text, using given font, in point (posX, posY), rotated to rotateAngle, with height scaleY and scaled width to scaleX, relatively to upper left corner, with color (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function draw_sprite">2.6.3. Function draw_sprite</h3>
+                        <p>
+                            void draw_sprite(Sprite sprite, float posX, float posY, float rotateAngle, float scaleX, float scaleY, float colorRed, float colorGreen, float colorBlue); The function renders the given sprite, in point (posX, posY), rotated to rotateAngle, with height scaleY and scaled width to scaleX, relatively to upper left corner, with color (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function draw_model">2.6.4. Function draw_model</h3>
+                        <p>
+                            void draw_model(Model model, float posX, float posY, float posZ, float rotateAngle, float rotateX, float rotateY, float rotateZ, float scaleX, float scaleY, float scaleZ); The function renders the given model, in point (posX, posY, posZ), rotated to rotateAngle relative to axis (rotateX, rotateY, rotateZ), scaled to (scaleX, scaleY, scaleZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Sound">2.7. Sound</h2>
+
+                        <h4 id="Function sound_play">2.7.1. Function sound_play</h3>
+                        <p>
+                            void sound_play(Sound sound); The function plays the sound.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function sound_stop">2.7.2. Function sound_stop</h3>
+                        <p>
+                            void sound_stop(Sound sound); The function stops the sound.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function sound_is_playing">2.7.3. Function sound_is_playing</h3>
+                        <p>
+                            bool sound_is_playing(Sound sound); The function returns if the sound is playing.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+        </footer>
+    </body>
+
+</html>
