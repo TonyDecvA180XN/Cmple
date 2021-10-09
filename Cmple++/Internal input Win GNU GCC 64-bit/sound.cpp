@@ -40,6 +40,7 @@ void Sound::Stop() {
     for (int i = 0; i < number_of_sounds; i++) {
         if (sound[i]->isPlaying()) {
             sound[i]->stop();
+            sound[i]->setPosition(0);
         }
     }
 }
