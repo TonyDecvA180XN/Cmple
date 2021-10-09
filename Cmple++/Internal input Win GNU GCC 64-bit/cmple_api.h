@@ -214,10 +214,10 @@ void set_point_light_color(int index, float colorRed, float colorGreen, float co
 void set_spot_light_position(float posX, float posY, float posZ);
 void set_spot_light_color(float colorRed, float colorGreen, float colorBlue);
 void set_spot_light_direction(float dirX, float dirY, float dirZ);
-void set_spot_light_angle(float cutOff, float outerCutOff);
+void set_spot_light_angle(float angleInner, float angleOuter);
 
 void draw_text(std::string text, cmple_font font, float posX, float posY,
-    float angleRotate, float scaleX, float scaleY,
+    float rotateAngle, float scaleX, float sizeY,
     float colorRed, float colorGreen, float colorBlue);
 
 void draw_sprite(Sprite sprite, float posX, float posY,

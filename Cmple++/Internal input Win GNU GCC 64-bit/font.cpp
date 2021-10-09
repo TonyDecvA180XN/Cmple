@@ -11,8 +11,8 @@ void Font::Load(std::string path) {
     }
 }
 
-void Font::DrawText(std::string text, float xPos, float yPos,
-    float angleRotate, float xScale, float ySize,
+void Font::DrawText(std::string text, float posX, float posY,
+    float rotateAngle, float scaleX, float sizeY,
     float colorRed, float colorGreen, float colorBlue,
     Shader shader, glm::mat4 model) {
     if (!loaded) {
@@ -21,9 +21,9 @@ void Font::DrawText(std::string text, float xPos, float yPos,
     }
 
     shader.use();
-    model = glm::translate(model, glm::vec3(xPos, yPos, 0.0f));
-    model = glm::rotate(model, glm::radians(angleRotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    model = glm::scale(model, glm::vec3(ySize * xScale / fontSize, ySize / fontSize, 1.0f));
+    model = glm::translate(model, glm::vec3(posX, posY, 0.0f));
+    model = glm::rotate(model, glm::radians(rotateAngle), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(sizeY * scaleX / fontSize, sizeY / fontSize, 1.0f));
 
     shader.setMat4("model", model);
     shader.setVec3("textColor", glm::vec3(colorRed, colorGreen, colorBlue));

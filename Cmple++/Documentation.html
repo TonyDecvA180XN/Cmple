@@ -80,6 +80,15 @@
                         <a href="#API">API</a>
                         <ol>
                             <li>
+                                <a href="#Class interaction">Class interaction</a>
+                                <ol>
+                                    <li><a href="#Function create_object_&ltclass_name&gt">Function create_object_&ltclass_name&gt</a></li>
+                                    <li><a href="#Function destroy_object_&ltclass_name&gt">Function destroy_object_&ltclass_name&gt</a></li>
+                                    <li><a href="#Class access operator &">Class access operator &</a></li>
+                                </ol>
+                            </li>
+
+                            <li>
                                 <a href="#Keyboard">Keyboard</a>
                                 <ol>
                                     <li><a href="#Keyboard key type">Keyboard key type</a></li>
@@ -165,32 +174,32 @@
                         <h3 id="Description">1.1 Description</h2>
 
                         <p>
-                            The main purpose of <b>Cmple++</b> program is to facilitate writing programs using graphics and interaction API-s. The program abstract the internal API-s and the architecture from user and present the unified API for all his purposes.
+                            The main purpose of <b>Cmple++</b> program is to facilitate writing programs using graphic and interaction API-s. The program abstract the internal API-s and the architecture from user and present the unified API for all his purposes.
                         </p>
 
                         <h4 id="How to use it">1.1.1. How to use it</h3>
                         <p>
                             The <b>Cmple++</b> program expects as input three directories:
                             <ol>
-                                <li><b>User input directory</b>. User writes a program in <b>User input directory</b>. The structure of the program is described <a href="#Input format">here</a>.</li>
-                                <li><b>Internal input directory</b>. The <b>Internal input directory</b> has to be downloaded with the <b>Cmple++</b> program. Make sure to download the correct version.</li>
-                                <li><b>Output directory</b>. The resulting project files will be saved in <b>Output directory</b>.</li>
+                                <li><b>User input directory</b>. User writes a program in <b>user input directory</b>. The structure of the program is described <a href="#Input format">here</a>.</li>
+                                <li><b>Internal input directory</b>. The <b>internal input directory</b> has to be downloaded with the <b>Cmple++</b> program. Make sure to download the correct version.</li>
+                                <li><b>Output directory</b>. The resulting project files will be saved in <b>output directory</b>.</li>
                             </ol>
-                            After successful parsing the user will have the source code and all resource files in <b>Output directory</b>. It is his decision how to compile it. There are following ways:
+                            After successful parsing the user will have the source code and all resource files in <b>output directory</b>. It is his decision how to compile it. There are following ways:
                             <ul>
-                                <li>If user works and has <b>GNU GCC 64-bit</b> compiler, he can use corresponding integrated execution flags.</li>
-                                <li>Otherwise user can use <b>CMake</b> to configure the project file for some IDE</li>
+                                <li>If user works with <b>GNU GCC 64-bit</b> compiler, he can use corresponding integrated execution flags.</li>
+                                <li>Otherwise user can use <b>CMake</b> to configure the project file for his IDE</li>
                             </ul>
                         </p>
                         <a href="#Navigation">Navigation</a>
 
                         <h4 id="Execution flags">1.1.2. Execution flags</h3>
                         <p>
-                            The <b>Cmple++</b> program supports some set of execution arguments.
+                            The <b>Cmple++</b> program supports the following set of execution arguments.
                             <ol>
-                                <li><b>input=&ltdirectory&gt</b>. This flag specifies the <b>User input directory</b>. By default it is <b>input</b></li>
-                                <li><b>const_input=&ltdirectory&gt</b>. This flag specifies the <b>Internal input directory</b>. By default it is <b>const_input</b></li>
-                                <li><b>to_compile=&ltdirectory&gt</b>. This flag specifies the <b>Output directory</b>. By default it is <b>to_compile</b></li>
+                                <li><b>input=&ltdirectory&gt</b>. This flag specifies the <b>user input directory</b>. By default it is <b>input</b></li>
+                                <li><b>const_input=&ltdirectory&gt</b>. This flag specifies the <b>internal input directory</b>. By default it is <b>const_input</b></li>
+                                <li><b>to_compile=&ltdirectory&gt</b>. This flag specifies the <b>output directory</b>. By default it is <b>to_compile</b></li>
                                 <li><b>gcc_create_batch</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler.</li>
                                 <li><b>gcc_auto_execute</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler and execute it. </li>
                             </ol>
@@ -249,7 +258,7 @@
 
                         <h4 id="Creation code script">1.2.3. Creation code script</h3>
                         <p>
-                            <b>Creation code script</b> is a file <b>creation_code.cpp</b>, which has to be in <b>scripts</b> subdirectory. In comparison to class files, it can't contain functions, but can contain local variables. This script is executed at start of program and has to be used, to create objects of classes. This is the only place, where user can change the name and resolution of window.
+                            <b>Creation code script</b> is a file <b>creation_code.cpp</b>, which has to be in <b>scripts</b> subdirectory. In comparison to class files, it can't contain functions, but can contain local variables. This script is executed at start of the program and has to be used, to create objects of classes. This is the only place, where user can change the name and resolution of window.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
@@ -279,7 +288,6 @@
                                 <li>.mp3</li>
                                 <li>.ogg</li>
                                 <li>.wav</li>
-                                <li>.tga</li>
                             </ul>
                             There might be also undocumented support for some other extensions. Note: the loading of <b>.mp3</b> and <b>.ogg</b> extensions is relatively slow.
                         </p>
@@ -295,10 +303,10 @@
 
                         <h4 id="Class type">1.3.1. Class type</h3>
                         <p>
-                            <b>Cmple++</b> introduces the following for every class in files <b>classes_implementation.h</b> and <b>classes>implementation.cpp</b>:
+                            <b>Cmple++</b> introduces the following variables for every class in files <b>classes_implementation.h</b> and <b>classes_implementation.cpp</b>:
                             <ul>
                                 <li><b>using &ltclass_name&gt_typename = int;</b></li>
-                                <li><b>std::map&ltint, &ltclass_name&gt*&gt &ltclass_name&gt_contaner;</b></li>
+                                <li><b>std::map&ltint, &ltclass_name&gt*&gt &ltclass_name&gt_container;</b></li>
                                 <li><b>int &ltclass_name&gt_object_number = 0;</b></li>
                             </ul>
                             Every class type variable is parsed into type <b>&ltclass_name&gt_typename</b>. If after a class <b>&ltclass_name&gt</b> variable <b>&ltvar&gt</b> there is <b>&</b>, then these units are parsed to <b>&ltclass_name&gt_container[&ltvar&gt]-&gt</b>.
@@ -307,10 +315,10 @@
 
                         <h4 id="Class API">1.3.2. Class API</h3>
                         <p>
-                            <b>Cmple++</b> introduces the following for every class in files <b>classes_implementation.h</b> and <b>classes>implementation.cpp</b>:
+                            <b>Cmple++</b> introduces the following functions for every class in files <b>classes_implementation.h</b> and <b>classes_implementation.cpp</b>:
                             <ul>
-                                <li><b>&ltclass_name&gt_typename create_object_&ltclass_name&gt();</b> This function allocates new object of class <b>&ltclass_name&gt</b> and returns it id.</li>
-                                <li><b>void destroy_object_&ltclass_name&gt(&ltclass_name&gt_typename);</b> This function deallocated the object of class <b>&ltclass_name&gt</b> with given id. This id will never be given to any new allocated object of this class.</li>
+                                <li><b>&ltclass_name&gt_typename create_object_&ltclass_name&gt();</b> This function allocates new object of class <b>&ltclass_name&gt</b> and returns it identifier.</li>
+                                <li><b>void destroy_object_&ltclass_name&gt(&ltclass_name&gt_typename id);</b> This function deallocated the object of class <b>&ltclass_name&gt</b> with given identifier. This identifier will never be given to any new allocated object of this class.</li>
                             </ul>
                             These functions are used to create and destroy objects of user classes.
                         </p>
@@ -318,7 +326,7 @@
 
                         <h4 id="Input file parsing">1.3.3. Input file parsing</h3>
                         <p>
-                            Input file has to contain a corresponding class. This class should not be declared as usual. Instead, the file has to contain variables and function in global scope. Only following functions has to be int file:
+                            Input file has to contain a corresponding class. This class should not be declared according to <b>C++ standard</b>. Instead, the file has to contain variables and function in global scope. Only following functions has to be in the file:
                             <ul>
                                 <li>Create</li>
                                 <li>Destroy</li>
@@ -326,7 +334,7 @@
                                 <li>Draw3D</li>
                                 <li>Draw2D</li>
                             </ul>
-                            This function has to be declared in form <b>&ltfunction&gt {...}</b>. Also all access to variables of objects has to be done through operator <b>&</b> instead of <b>.</b> of <b>-&gt</b>, as they has to be operated as class variables. The parser detects the scope of variables while checking, if a variable has a class type. There are no other restrictions, and the code has to be written in accordance to <b>C++ specification</b>. The parser creates both <b>source</b> and <b>header</b> files. There also has to be a <b>creation_code.cpp</b> file in <b>user input directory</b>. This code is parsed as a single function and can't have any function in it.
+                            This function has to be declared in form <b>&ltfunction&gt {...}</b>. Also all access to variables of classes has to be done through operator <b>&</b> instead of <b>.</b> or <b>-&gt</b>, as they has to be operated as class variables. The parser detects the scope of variables while checking, if a variable has a class type. There are no other restrictions, and the code has to be written in accordance to <b>C++ standard</b>. The parser creates both <b>source</b> and <b>header</b> files. There also has to be a <b>creation_code.cpp</b> file in <b>user input directory</b>. This code is parsed as a single function and can't have any function in it.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
@@ -336,14 +344,14 @@
                             <ul>
                                 <li><b>&ltclass_name&gt.cpp</b> - the source file for every input class, which is compiled separately.</li>
                                 <li><b>&ltclass_name&gt.h</b> - the header file for every input class, which is compiled separately.</li>
-                                <li><b>creation_code.h</b> - the header file for creation code file, which is including in corresponding place.</li>
+                                <li><b>creation_code.h</b> - the header file for creation code file, which is included in corresponding place.</li>
                                 <li><b>classes_implementation.cpp</b> - the source file with API of input classes, which is compiled separately.</li>
                                 <li><b>classes_implementation.h</b> - the header file with API of input classes, which is compiled separately.</li>
-                                <li><b>files_load.h</b> - the header file with loading sprites and models, which is including in corresponding place.</li>
-                                <li><b>files_load_audio.h</b> - the header file with loading sounds, which is including in corresponding place.</li>
-                                <li><b>files_update.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
-                                <li><b>files_display3d.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
-                                <li><b>files_display2d.h</b> - the header file with call update function of input classes, which is including in corresponding place.</li>
+                                <li><b>files_load.h</b> - the header file with loading sprites and models, which is included in corresponding place.</li>
+                                <li><b>files_load_audio.h</b> - the header file with loading sounds, which is included in corresponding place.</li>
+                                <li><b>files_update.h</b> - the header file with call update function of input classes, which is included in corresponding place.</li>
+                                <li><b>files_display3d.h</b> - the header file with call <b>Draw3D</b> function of input classes, which is included in corresponding place.</li>
+                                <li><b>files_display2d.h</b> - the header file with call <b>Draw2D</b> function of input classes, which is included in corresponding place.</li>
                             </ul>
                         </p>
                         <a href="#Navigation">Navigation</a>
@@ -396,7 +404,7 @@
                             The engine has following classes for support the input resources:
                             <ul>
                                 <li><b>Sprite</b>. Loads image using <a href="#Graphic libraries">stb_image</a> and renders it.</li>
-                                <li><b>Model</b>. Loads <b>.obj</b> model with using self-written parser and renders it.</li>
+                                <li><b>Model</b>. Loads <b>.obj</b> model using self-written parser and renders it.</li>
                                 <li><b>Sound</b>. Loads sound using <a href="#Audio">Audiere</a> parser and calls it to play the sound.</li>
                                 <li><b>Shader</b>. Loads vertex, fragment and geometric shaders written on <a href="https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)">GLSL version 330</a></li>
                                 <li><b>Font</b>. Loads <b>.fnt</b> font using self-written parser and <a href="#Graphic libraries">stb_image</a> and renders it. </li>
@@ -410,179 +418,201 @@
                     <h2 id="API">2. API</h2>
 
                     <div>
-                        <h3 id="Keyboard">2.1. Keyboard</h2>
+                        <h3 id="Class interaction">2.1. Class interaction</h2>
 
-                        <h4 id="Keyboard key type">2.1.1. Keyboard key type</h3>
+                        <h4 id="Function create_object_&ltclass_name&gt">2.1.1. Function create_object_&ltclass_name&gt</h3>
+                        <p>
+                            <b>&ltclass_name&gt_typename create_object_&ltclass_name&gt();</b> The function creates the object of class <b>&ltclass_name&gt</b> and returns its identifier.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function destroy_object_&ltclass_name&gt">2.1.2. Function destroy_object_&ltclass_name&gt</h3>
+                        <p>
+                            <b>void destroy_object_&ltclass_name&gt(&ltclass_name&gt_typename id);</b> The function destroys the object of class <b>&ltclass_name&gt</b> with identifier id.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Class access operator &">2.1.3. Class access operator &</h3>
+                        <p>
+                            The access to variable of <b>&ltclass_name&gt_typename</b> has to be made through the operator <b>&</b>. Example: A a; a&x = 5; B b[5]; b[1]&y = 6.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Keyboard">2.2. Keyboard</h2>
+
+                        <h4 id="Keyboard key type">2.2.1. Keyboard key type</h3>
                         <p>
                             The keyboard keys have type <b>cmple_keyboard_key</b> and defined in form <b>KB_&ltkey&gt</b>. Example: <b>KB_SPACE</b>.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function keyboard">2.1.2. Function keyboard</h3>
+                        <h4 id="Function keyboard">2.2.2. Function keyboard</h3>
                         <p>
-                            bool keyboard(cmple_keyboard_key key); The function returns if the key is pressed.
+                            <b>bool keyboard(cmple_keyboard_key key);</b> The function returns if the <b>key</b> is pressed.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function keyboard_pressed">2.1.3. Function keyboard_pressed</h3>
+                        <h4 id="Function keyboard_pressed">2.2.3. Function keyboard_pressed</h3>
                         <p>
-                            bool keyboard_pressed(cmple_keyboard_key key); The function returns if the key was currently pressed.
+                            <b>bool keyboard_pressed(cmple_keyboard_key key);</b> The function returns if the <b>key</b> was currently pressed.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function keyboard_released">2.1.4. Function keyboard_released</h3>
+                        <h4 id="Function keyboard_released">2.2.4. Function keyboard_released</h3>
                         <p>
-                            bool keyboard_released(cmple_keyboard_key key); The function returns if the key was currently released.
+                            <b>bool keyboard_released(cmple_keyboard_key key);</b> The function returns if the <b>key</b> was currently released.
                         </p>
                         <a href="#Navigation">Navigation</a>
                     </div>
 
                     <div>
-                        <h3 id="Mouse">2.2. Mouse</h2>
+                        <h3 id="Mouse">2.3. Mouse</h2>
 
-                        <h4 id="Mouse button type">2.2.1. Mouse button type</h3>
+                        <h4 id="Mouse button type">2.3.1. Mouse button type</h3>
                         <p>
                             The mouse buttons have type <b>cmple_mouse_button</b> and defined in form <b>MB_&ltkey&gt</b>. Example: <b>MB_LEFT</b>.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function mouse">2.2.2. Function mouse</h3>
+                        <h4 id="Function mouse">2.3.2. Function mouse</h3>
                         <p>
-                            bool mouse(cmple_mouse_button button); The function returns if the button is pressed.
+                            <b>bool mouse(cmple_mouse_button button);</b> The function returns if the <b>button</b> is pressed.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function mouse_pressed">2.2.3. Function mouse_pressed</h3>
+                        <h4 id="Function mouse_pressed">2.3.3. Function mouse_pressed</h3>
                         <p>
-                            bool mouse_pressed(cmple_mouse_button button); The function returns if the button was currently pressed.
+                            <b>bool mouse_pressed(cmple_mouse_button button);</b> The function returns if the <b>button</b> was currently pressed.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function mouse_released">2.2.4. Function mouse_released</h3>
+                        <h4 id="Function mouse_released">2.3.4. Function mouse_released</h3>
                         <p>
-                            bool mouse_released(cmple_mouse_button button); The function returns if the button was currently released.
+                            <b>bool mouse_released(cmple_mouse_button button);</b> The function returns if the <b>button</b> was currently released.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function mouse_x">2.2.5. Function mouse_x</h3>
+                        <h4 id="Function mouse_x">2.3.5. Function mouse_x</h3>
                         <p>
-                            int mouse_x(); The function returns the x coordinate of cursor in pixels relative to upper left corner of window.
+                            <b>int mouse_x();</b> The function returns the x coordinate of cursor in pixels relative to upper left corner of window.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function mouse_y">2.2.6. Function mouse_y</h3>
+                        <h4 id="Function mouse_y">2.3.6. Function mouse_y</h3>
                         <p>
-                            int mouse_y(); The function returns the y coordinate of cursor in pixels relative to upper left corner of window.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-                    </div>
-
-                    <div>
-                        <h3 id="Program control">2.3. Program control</h2>
-
-                        <h4 id="Function set_resolution">2.3.1. Function set_resolution</h3>
-                        <p>
-                            void set_resolution(unsigned int width, unsigned int height); The function sets the sizes of window to width and height. The function has to be called in creation code or in Create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_window_name">2.3.2. Function set_window_name</h3>
-                        <p>
-                            void set_window_name(std::string name); The function sets the title of window to name. The function has to be called in creation code or in create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_frame_per_second">2.3.3. Function set_frame_per_second</h3>
-                        <p>
-                            void set_frame_per_second(double fps); The function sets the frame per second of program to fps. By default the fps is 100.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function end_program">2.3.4. Function end_program</h3>
-                        <p>
-                            void end_program(); The function ends program at end current iteration. <b>Important</b>: this function does not call Destroy function of objects.
+                            <b>int mouse_y();</b> The function returns the y coordinate of cursor in pixels relative to upper left corner of window.
                         </p>
                         <a href="#Navigation">Navigation</a>
                     </div>
 
                     <div>
-                        <h3 id="Camera">2.4. Camera</h2>
+                        <h3 id="Program control">2.4. Program control</h2>
 
-                        <h4 id="Function set_camera_position_by_look_at">2.4.1. Function set_camera_position_by_look_at</h3>
+                        <h4 id="Function set_resolution">2.4.1. Function set_resolution</h3>
                         <p>
-                            void set_camera_position_by_look_at(float posX, float posY, float posZ, float targetX, float targetY, float targetZ); The function sets the position of camera such that it is in point (posX, posY, posZ), looks at point (targetX, targetY, targetZ) and its upper vector is (0, 1, 0).
+                            <b>void set_resolution(unsigned int width, unsigned int height);</b> The function sets the sizes of window to <b>width</b> and <b>height</b>. The function has to be called in creation code or in Create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function set_camera_position_by_angles">2.4.2. Function set_camera_position_by_angles</h3>
+                        <h4 id="Function set_window_name">2.4.2. Function set_window_name</h3>
                         <p>
-                            void set_camera_position_by_angles(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch); The function sets the position of camera such that it is in point (posX, posY, posZ) and has corresponding upper vector, pitch and yaw.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-                    </div>
-
-                    <div>
-                        <h3 id="Light">2.5. Light</h2>
-
-                        <h4 id="Function set_exposure">2.5.1. Function set_exposure</h3>
-                        <p>
-                            void set_exposure(float exposure); The function sets the exposure of light. By default it is recommended to use exposure = 1. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void set_window_name(std::string name);</b> The function sets the title of window to <b>name</b>. The function has to be called in creation code or in create function of class, whose object was created during creation code. Otherwise, the function will not change anything.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function set_directional_light_direction">2.5.2. Function set_directional_light_direction</h3>
+                        <h4 id="Function set_frame_per_second">2.4.3. Function set_frame_per_second</h3>
                         <p>
-                            void set_directional_light_direction(float dirX, float dirY, float dirZ); The function sets the direction of directional light to (dirX, dirY, dirZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void set_frame_per_second(double fps);</b> The function sets the frame per second of program to <b>fps</b>. By default the fps is 100.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function set_directional_light_color">2.5.3. Function set_directional_light_color</h3>
+                        <h4 id="Function end_program">2.4.4. Function end_program</h3>
                         <p>
-                            void set_directional_light_color(float colorRed, float colorGreen, float colorBlue); The function sets the color of directional light to (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_point_light_position">2.5.4. Function set_point_light_position</h3>
-                        <p>
-                            void set_point_light_position(int index, float posX, float posY, float posZ); The function sets the position of point light with corresponding index to (posX, posY, posZ). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_point_light_color">2.5.5. Function set_point_light_color</h3>
-                        <p>
-                            void set_point_light_color(int index, float colorRed, float colorGreen, float colorBlue); The function sets the color of point light with corresponding index to (colorRed, colorGreen, colorBlue). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_spot_light_position">2.5.6. Function set_spot_light_position</h3>
-                        <p>
-                            void set_spot_light_position(float posX, float posY, float posZ); The function sets the position of spot light to (posX, posY, posZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_spot_light_color">2.5.7. Function set_spot_light_color</h3>
-                        <p>
-                            void set_spot_light_color(float colorRed, float colorGreen, float colorBlue); The function sets the color of spot light to (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_spot_light_direction">2.5.8. Function set_spot_light_direction</h3>
-                        <p>
-                            void set_spot_light_direction(float dirX, float dirY, float dirZ); The function sets the direction of spot light to (dirX, dirY, dirZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
-                        </p>
-                        <a href="#Navigation">Navigation</a>
-
-                        <h4 id="Function set_spot_light_angle">2.5.9. Function set_spot_light_angle</h3>
-                        <p>
-                            void set_spot_light_angle(float cutOff, float outerCutOff); The function sets the angles of full intensity and decreasing from full to zero intencity of spot light to cutOff and outerCutOff. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void end_program();</b> The function ends program at the end of current iteration. <b>Important</b>: this function does not call Destroy function of objects.
                         </p>
                         <a href="#Navigation">Navigation</a>
                     </div>
 
                     <div>
-                        <h3 id="Render">2.6. Render</h2>
+                        <h3 id="Camera">2.5. Camera</h2>
 
-                        <h4 id="Font type">2.6.1. Font type</h3>
+                        <h4 id="Function set_camera_position_by_look_at">2.5.1. Function set_camera_position_by_look_at</h3>
+                        <p>
+                            <b>void set_camera_position_by_look_at(float posX, float posY, float posZ, float targetX, float targetY, float targetZ);</b> The function sets the position of camera such that it is in point (<b>posX</b>, <b>posY</b>, <b>posZ</b>), looks at point (<b>targetX</b>, <b>targetY</b>, <b>targetZ</b>) and its upper vector is (0, 1, 0).
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_camera_position_by_angles">2.5.2. Function set_camera_position_by_angles</h3>
+                        <p>
+                            <b>void set_camera_position_by_angles(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);</b> The function sets the position of camera such that it is in point (<b>posX</b>, <b>posY</b>, <b>posZ</b>), has upper vector (<b>upX</b>, <b>upY</b>, <b>upZ</b>) and corresponding <b>pitch</b> and <b>yaw</b>. The <b>pitch</b> and <b>yaw</b> are measured in degrees.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Light">2.6. Light</h2>
+
+                        <h4 id="Function set_exposure">2.6.1. Function set_exposure</h3>
+                        <p>
+                            <b>void set_exposure(float exposure);</b> The function sets the <b>exposure</b> of light. By default it is recommended to use exposure = 1. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_directional_light_direction">2.6.2. Function set_directional_light_direction</h3>
+                        <p>
+                            <b>void set_directional_light_direction(float dirX, float dirY, float dirZ);</b> The function sets the direction of directional light to (<b>dirX</b>, <b>dirY</b>, <b>dirZ</b>). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_directional_light_color">2.6.3. Function set_directional_light_color</h3>
+                        <p>
+                            <b>void set_directional_light_color(float colorRed, float colorGreen, float colorBlue);</b> The function sets the color of directional light to (<b>colorRed</b>, <b>colorGreen</b>, <b>colorBlue</b>). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_point_light_position">2.6.4. Function set_point_light_position</h3>
+                        <p>
+                            <b>void set_point_light_position(int index, float posX, float posY, float posZ);</b> The function sets the position of point light with corresponding <b>index</b> to (<b>posX</b>, <b>posY</b>, <b>posZ</b>). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_point_light_color">2.6.5. Function set_point_light_color</h3>
+                        <p>
+                            <b>void set_point_light_color(int index, float colorRed, float colorGreen, float colorBlue);</b> The function sets the color of point light with corresponding <b>index</b> to (<b>colorRed</b>, <b>colorGreen</b>, <b>colorBlue</b>). The index has to be from 0 to 15. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_position">2.6.6. Function set_spot_light_position</h3>
+                        <p>
+                            <b>void set_spot_light_position(float posX, float posY, float posZ);</b> The function sets the position of spot light to (<b>posX</b>, <b>posY</b>, <b>posZ</b>). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_color">2.6.7. Function set_spot_light_color</h3>
+                        <p>
+                            <b>void set_spot_light_color(float colorRed, float colorGreen, float colorBlue);</b> The function sets the color of spot light to (<b>colorRed</b>, <b>colorGreen</b>, <b>colorBlue</b>). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_direction">2.6.8. Function set_spot_light_direction</h3>
+                        <p>
+                            <b>void set_spot_light_direction(float dirX, float dirY, float dirZ);</b> The function sets the direction of spot light to (<b>dirX</b>, <b>dirY</b>, <b>dirZ</b>). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Function set_spot_light_angle">2.6.9. Function set_spot_light_angle</h3>
+                        <p>
+                            <b>void set_spot_light_angle(float angleInner, float angleOuter);</b> The function sets the angle of full intensity of spot light to <b>angleInner</b> and angle of decreasing from full to zero intensity to <b>angleOuter</b>. The <b>angleInner</b> and <angleOuter</b> are measured in degrees. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+                    </div>
+
+                    <div>
+                        <h3 id="Render">2.7. Render</h2>
+
+                        <h4 id="Font type">2.7.1. Font type</h3>
                         <p>
                             The font have type <b>cmple_font</b> and defined in form <b>FT_&ltfont&gt</b>. Only 3 fonts are available:
                             <ul>
@@ -593,43 +623,43 @@
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function draw_text">2.6.2. Function draw_text</h3>
+                        <h4 id="Function draw_text">2.7.2. Function draw_text</h3>
                         <p>
-                            void draw_text(std::string text, cmple_font font, float posX, float posY, float angleRotate, float scaleX, float scaleY, float colorRed, float colorGreen, float colorBlue); The function renders the given text, using given font, in point (posX, posY), rotated to rotateAngle, with height scaleY and scaled width to scaleX, relatively to upper left corner, with color (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void draw_text(std::string text, cmple_font font, float posX, float posY, float rotateAngle, float scaleX, float sizeY, float colorRed, float colorGreen, float colorBlue);</b> The function renders the given <b>text</b>, using given <b>font</b>, in point (<b>posX</b>, <b>posY</b>), rotated to <b>rotateAngle</b>, scaled width to <b>scaleX</b>, with size <b>sizeY</b>, relatively to upper left corner, with color (<b>colorRed</b>, <b>colorGreen</b>, <b>colorBlue</b>). The <b>rotateAngle</b> is measured in degrees. The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function draw_sprite">2.6.3. Function draw_sprite</h3>
+                        <h4 id="Function draw_sprite">2.7.3. Function draw_sprite</h3>
                         <p>
-                            void draw_sprite(Sprite sprite, float posX, float posY, float rotateAngle, float scaleX, float scaleY, float colorRed, float colorGreen, float colorBlue); The function renders the given sprite, in point (posX, posY), rotated to rotateAngle, with height scaleY and scaled width to scaleX, relatively to upper left corner, with color (colorRed, colorGreen, colorBlue). The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void draw_sprite(Sprite sprite, float posX, float posY, float rotateAngle, float scaleX, float scaleY, float colorRed, float colorGreen, float colorBlue);</b> The function renders the given <b>sprite</b>, in point (<b>posX</b>, <b>posY</b>), rotated to <b>rotateAngle</b>, scaled to (<b>scaleX</b>, <b>scaleY</b>), relatively to upper left corner, with color (<b>colorRed</b>, <b>colorGreen</b>, <b>colorBlue</b>). The <b>rotateAngle</b> is measured in degrees. The function has to be called in <b>Draw2D</b> function of class. Otherwise, the function will not change anything.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function draw_model">2.6.4. Function draw_model</h3>
+                        <h4 id="Function draw_model">2.7.4. Function draw_model</h3>
                         <p>
-                            void draw_model(Model model, float posX, float posY, float posZ, float rotateAngle, float rotateX, float rotateY, float rotateZ, float scaleX, float scaleY, float scaleZ); The function renders the given model, in point (posX, posY, posZ), rotated to rotateAngle relative to axis (rotateX, rotateY, rotateZ), scaled to (scaleX, scaleY, scaleZ). The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
+                            <b>void draw_model(Model model, float posX, float posY, float posZ, float rotateAngle, float rotateX, float rotateY, float rotateZ, float scaleX, float scaleY, float scaleZ);</b> The function renders the given <b>model</b>, in point (<b>posX</b>, <b>posY</b>, <b>posZ</b>), rotated to <b>rotateAngle</b> relative to axis (<b>rotateX</b>, <b>rotateY</b>, <b>rotate</b>), scaled to (<b>scaleX</b>, <b>scaleY</b>, <b>scaleZ</b>). The <b>rotateAngle</b> is measured in degrees. The function has to be called in <b>Draw3D</b> function of class. Otherwise, the function will not change anything.
                         </p>
                         <a href="#Navigation">Navigation</a>
                     </div>
 
                     <div>
-                        <h3 id="Sound">2.7. Sound</h2>
+                        <h3 id="Sound">2.8. Sound</h2>
 
-                        <h4 id="Function sound_play">2.7.1. Function sound_play</h3>
+                        <h4 id="Function sound_play">2.8.1. Function sound_play</h3>
                         <p>
-                            void sound_play(Sound sound); The function plays the sound.
+                            <b>void sound_play(Sound sound);</b> The function plays the <b>sound</b>.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function sound_stop">2.7.2. Function sound_stop</h3>
+                        <h4 id="Function sound_stop">2.8.2. Function sound_stop</h3>
                         <p>
-                            void sound_stop(Sound sound); The function stops the sound.
+                            <b>void sound_stop(Sound sound);</b> The function stops the <b>sound</b>.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Function sound_is_playing">2.7.3. Function sound_is_playing</h3>
+                        <h4 id="Function sound_is_playing">2.8.3. Function sound_is_playing</h3>
                         <p>
-                            bool sound_is_playing(Sound sound); The function returns if the sound is playing.
+                            <b>bool sound_is_playing(Sound sound);</b> The function returns if the <b>sound</b> is playing.
                         </p>
                         <a href="#Navigation">Navigation</a>
                     </div>
@@ -640,5 +670,4 @@
         <footer>
         </footer>
     </body>
-
 </html>

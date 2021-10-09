@@ -9,8 +9,8 @@ class Font {
 public:
     void Load(std::string path);
 
-    void DrawText(std::string text, float xPos, float yPos,
-        float angleRotate, float xScale, float ySize,
+    void DrawText(std::string text, float posX, float posY,
+        float rotateAngle, float scaleX, float sizeY,
         float colorRed, float colorGreen, float colorBlue,
         Shader shader, glm::mat4 model);
 

@@ -37,8 +37,13 @@ Update {
 
     if (mouse_pressed(MB_LEFT))
         x = -x;
-    if (mouse_pressed(MB_RIGHT))
+    if (mouse_released(MB_RIGHT))
         y = -y;
+
+    if (mouse(MB_MIDDLE))
+        angle -= 0.1;
+    else
+        angle += 0.1;
 
     if (keyboard(KB_UP))
         x -= 0.01;
@@ -59,13 +64,13 @@ Update {
 
     if (keyboard_pressed(KB_SPACE))
         end_program();
-
-    angle += 0.1;
 }
 
 Draw3D {
-    set_exposure(1.0);
     set_camera_position_by_look_at(5.0, 3.0, 0.0, 0.0, 0.5, 0.0);
+    // set_camera_position_by_angles(5.0, 3.0, 0.0, 0.0, 1.0, 0.0, 180.0, -30.0);
+
+    set_exposure(1.0);
 
     set_directional_light_direction(0.0, 10.0, -1.0);
     set_directional_light_color(1.0, 1.0, 1.0);
@@ -89,9 +94,14 @@ Draw2D {
     draw_text("It's cmple!", FT_ARIAL, 50.0, 50.0, 0.0, 1.0, 32.0, 1.0, 0.3, 0.3);
     draw_text("Ra%^&bW\\&~a\"b\'a`fa)(sg{}/", FT_CALIBRI, 300.0, 300.0, angle, 1.0, 32.0, 0.3, 0.3, 1.0);
     draw_text(std::to_string(mouse_x()), FT_TIMES_NEW_ROMAN, 100.0, 500.0, 0.0, 1.0, 24.0, 0.3, 1.0, 0.3);
-    draw_text(std::to_string(mouse_y()), FT_TIMES_NEW_ROMAN, 100.0, 550.0, 0.0, 2.0, 32.0, 0.3, 1.0, 0.3);
+    draw_text(std::to_string(mouse_y()), FT_TIMES_NEW_ROMAN, 100.0, 550.0, 0.0, 2.0, 32.0, 0.3, 1.0, 1.0);
     draw_sprite(gatling, 600.0, 400.0, 45.0, 96.0, 96.0,
                 sin(angle / 180.0 * pi) / 2.0 + 0.5,
                 sin(angle / 180.0 * pi + pi / 3.0) / 2.0 + 0.5,
                 sin(angle / 180.0 * pi + 2.0 * pi / 3.0) / 2.0 + 0.5);
+
+    if (sound_is_playing(back_music))
+        draw_text("Music: ON", FT_ARIAL, 500.0, 30.0, 0.0, 1.0, 32.0, 1.0, 1.0, 0.3);
+    else
+        draw_text("Music: OFF", FT_ARIAL, 500.0, 30.0, 0.0, 1.0, 32.0, 1.0, 0.3, 1.0);
 }

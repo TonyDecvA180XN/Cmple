@@ -15,7 +15,9 @@ class Model {
 public:
     void Load(std::string path);
 
-    void Draw(float xPos, float yPos, float zPos, float angleRotate, float xRotate, float yRotate, float zRotate, float xScale, float yScale, float zScale,
+    void Draw(float posX, float posY, float posZ,
+        float rotateAngle, float rotateX, float rotateY, float rotateZ,
+        float scaleX, float scaleY, float scaleZ,
         Shader shader, glm::mat4 model);
 
 private:

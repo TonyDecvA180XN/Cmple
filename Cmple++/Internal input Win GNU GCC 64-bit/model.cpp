@@ -14,9 +14,9 @@ void Model::Load(std::string path) {
     }
 }
 
-void Model::Draw(float xPos, float yPos, float zPos,
-    float angleRotate, float xRotate, float yRotate, float zRotate,
-    float xScale, float yScale, float zScale,
+void Model::Draw(float posX, float posY, float posZ,
+    float rotateAngle, float rotateX, float rotateY, float rotateZ,
+    float scaleX, float scaleY, float scaleZ,
     Shader shader, glm::mat4 model) {
     if (!loaded) {
         std::cerr << "Model was not successfully initialized" << std::endl;
@@ -24,9 +24,9 @@ void Model::Draw(float xPos, float yPos, float zPos,
     }
 
     shader.use();
-    model = glm::translate(model, glm::vec3(xPos, yPos, zPos));
-    model = glm::rotate(model, angleRotate, glm::vec3(xRotate, yRotate, zRotate));
-    model = glm::scale(model, glm::vec3(xScale, yScale, zScale));
+    model = glm::translate(model, glm::vec3(posX, posY, posZ));
+    model = glm::rotate(model, rotateAngle, glm::vec3(rotateX, rotateY, rotateZ));
+    model = glm::scale(model, glm::vec3(scaleX, scaleY, scaleZ));
     shader.setMat4("model", model);
     for (size_t t = 0; t < meshes.size(); t++) {
         glActiveTexture(GL_TEXTURE0);

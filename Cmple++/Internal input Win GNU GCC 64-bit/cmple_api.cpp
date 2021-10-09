@@ -168,15 +168,15 @@ void set_spot_light_direction(float dirX, float dirY, float dirZ) {
     }
 }
 
-void set_spot_light_angle(float cutOff, float outerCutOff) {
+void set_spot_light_angle(float angleInner, float angleOuter) {
     if (cmple_engine::mutex_display_3d_enabled) {
-        cmple_engine::shader_default_3d.setFloat("spotLight.CutOff", cos(glm::radians(cutOff)));
-        cmple_engine::shader_default_3d.setFloat("spotLight.OuterCutOff", cos(glm::radians(outerCutOff)));
+        cmple_engine::shader_default_3d.setFloat("spotLight.angleInner", cos(glm::radians(angleInner)));
+        cmple_engine::shader_default_3d.setFloat("spotLight.angleOuter", cos(glm::radians(angleOuter)));
     }
 }
 
 void draw_text(std::string text, cmple_font font, float posX, float posY,
-    float angleRotate, float scaleX, float scaleY,
+    float rotateAngle, float scaleX, float sizeY,
     float colorRed, float colorGreen, float colorBlue) {
 
     if (cmple_engine::mutex_display_2d_enabled) {
@@ -185,21 +185,21 @@ void draw_text(std::string text, cmple_font font, float posX, float posY,
         switch (font) {
         case FT_ARIAL:
             cmple_engine::font_default_arial.DrawText(text, posX, posY,
-                angleRotate, scaleX, scaleY,
+                rotateAngle, scaleX, sizeY,
                 colorRed, colorGreen, colorBlue,
                 cmple_engine::shader_default_text, model_matrix);
             break;
 
         case FT_CALIBRI:
             cmple_engine::font_default_calibri.DrawText(text, posX, posY,
-                angleRotate, scaleX, scaleY,
+                rotateAngle, scaleX, sizeY,
                 colorRed, colorGreen, colorBlue,
                 cmple_engine::shader_default_text, model_matrix);
             break;
 
         case FT_TIMES_NEW_ROMAN:
             cmple_engine::font_default_times_new_roman.DrawText(text, posX, posY,
-                angleRotate, scaleX, scaleY,
+                rotateAngle, scaleX, sizeY,
                 colorRed, colorGreen, colorBlue,
                 cmple_engine::shader_default_text, model_matrix);
             break;

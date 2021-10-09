@@ -21,8 +21,8 @@ struct SpotLight {
     vec3 Position;
     vec3 Color;
     vec3 Direction;
-    float CutOff;
-    float OuterCutOff;
+    float angleInner;
+    float angleOuter;
 };
 
 const float gamma = 2.2;
@@ -57,7 +57,7 @@ vec3 CalculatePointLight() {
     vec3 normal = normalize(fs_in.Normal);
     vec3 result = vec3(0.0);
 
-    for(int i = 0; i < N_POINT_LIGHTS; i++) {
+    for (int i = 0; i < N_POINT_LIGHTS; i++) {
         vec3 lightDir = normalize(pointLight[i].Position - fs_in.FragPos);
         float diff = max(dot(lightDir, normal), 0.0);
         vec3 diffuse = pointLight[i].Color * diff * color;
@@ -92,8 +92,8 @@ vec3 CalculateSpotLight() {
     vec3 specular = spotLight.Color * spec;
 
     float theta = dot(lightDir, normalize(-spotLight.Direction));
-    float epsilon = spotLight.CutOff - spotLight.OuterCutOff;
-    float intensity = clamp((theta - spotLight.OuterCutOff) / epsilon, 0.0, 1.0);
+    float epsilon = spotLight.angleInner - spotLight.angleOuter;
+    float intensity = clamp((theta - spotLight.angleOuter) / epsilon, 0.0, 1.0);
 
     return (diffuse + specular) * intensity;
 }

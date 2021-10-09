@@ -11,8 +11,8 @@ void Sprite::Load(std::string path) {
     }
 }
 
-void Sprite::Draw(float xPos, float yPos, float angleRotate,
-    float xScale, float yScale,
+void Sprite::Draw(float posX, float posY, float rotateAngle,
+    float scaleX, float scaleY,
     float colorRed, float colorGreen, float colorBlue,
     Shader shader, glm::mat4 model) {
     if (!loaded) {
@@ -21,11 +21,9 @@ void Sprite::Draw(float xPos, float yPos, float angleRotate,
     }
 
     shader.use();
-    model = glm::translate(model, glm::vec3(xPos, yPos, 0.0f));
-    model = glm::translate(model, glm::vec3(0.5f * origin_x, 0.5f * origin_y, 0.0f));
-    model = glm::rotate(model, glm::radians(angleRotate), glm::vec3(0.0f, 0.0f, 1.0f));
-    model = glm::translate(model, glm::vec3(-0.5f * origin_x, -0.5f * origin_y, 0.0f));
-    model = glm::scale(model, glm::vec3(xScale, yScale, 1.0f));
+    model = glm::translate(model, glm::vec3(posX, posY, 0.0f));
+    model = glm::rotate(model, glm::radians(rotateAngle), glm::vec3(0.0f, 0.0f, 1.0f));
+    model = glm::scale(model, glm::vec3(scaleX, scaleY, 1.0f));
 
     shader.setMat4("model", model);
     shader.setVec3("spriteColor", glm::vec3(colorRed, colorGreen, colorBlue));

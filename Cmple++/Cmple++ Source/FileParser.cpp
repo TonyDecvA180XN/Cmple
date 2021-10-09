@@ -376,7 +376,7 @@ void FileParser::create_classes_implementation_header_files() {
     file << "\n";
 
     for (std::string class_name : classes) {
-        file << "void destroy_object_" << class_name << "(" << class_name << "_typename num);\n";
+        file << "void destroy_object_" << class_name << "(" << class_name << "_typename id);\n";
     }
     file << "\n";
 
@@ -430,9 +430,9 @@ void FileParser::create_classes_implementation_source_files() {
     }
 
     for (std::string class_name : classes) {
-        file << "void destroy_object_" << class_name << "(" << class_name << "_typename num) {\n"
-            << "\t" << class_name << "_container[num]->Destroy();\n"
-            << "\t" << class_name << "_container.erase(num);\n" << "}\n\n";
+        file << "void destroy_object_" << class_name << "(" << class_name << "_typename id) {\n"
+            << "\t" << class_name << "_container[id]->Destroy();\n"
+            << "\t" << class_name << "_container.erase(id);\n" << "}\n\n";
     }
 
     file.close();

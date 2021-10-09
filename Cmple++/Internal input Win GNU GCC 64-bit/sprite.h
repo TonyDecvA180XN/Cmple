@@ -11,15 +11,13 @@ class Sprite {
 public:
     void Load(std::string path);
 
-    void Draw(float xPos, float yPos, float angleRotate,
-        float xScale, float yScale,
+    void Draw(float posX, float posY, float rotateAngle,
+        float scaleX, float scaleY,
         float colorRed, float colorGreen, float colorBlue,
         Shader shader, glm::mat4 model);
 
 private:
     bool loaded = false;
-    int origin_x = 0.0;
-    int origin_y = 0.0;
     unsigned int quadVAO;
     unsigned int texture;
 
