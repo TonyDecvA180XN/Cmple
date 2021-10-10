@@ -81,13 +81,13 @@ Maintainability | Testability | We will include an option to enable debugging sy
 ## Repository structure ##
 Cmple project is implemented in C++. The directory structure follows universal CMake pattern:
 
-	/Build          Binary & Intermediate files (by CMake)
-    /Core		    Cmple source code
-        /Include    Header public files
-        /Source     Source code private files
-	/ThirdParty 	Third-party libraries
-	/Tests		    Test subproject
-	/Examples	    Example project inputs & outputs
+	/Build			Binary & Intermediate files (by CMake)
+	/Core			Cmple source code
+		/Include	Header public files
+		/Source		Source code private files
+	/ThirdParty		Third-party libraries
+	/Tests			Test subproject
+	/Examples		Example project inputs & outputs
 
 ## Design and Architecture ##
 
@@ -172,8 +172,8 @@ Every time you need to change compiler suite or your project structure is messed
 Build process relies on CMake, so make sure all your desired compile environment are visible to it. You can check available generators by running `cmake --help` and examining the trailing section.
 
 To build the project you need run appropriate batch script, as for Unix, one of the:
-- `Build-Linux-Clang.bat` for Clang compiler with GCC build system
-- `Build-Linux-GCC.bat` for GCC compiler
+- `bash Build-Linux-Clang.sh` for Clang compiler with GCC build system
+- `bash Build-Linux-GCC.sh` for GCC compiler
 
 First build takes a lot time since it has to build all the libraries included in project.
 
