@@ -1,0 +1,6 @@
+Cmple.exe input=Test_input_1 to_compile=Test_output_1 gcc_auto_execute
+Cmple.exe input=Test_input_2 to_compile=Test_output_2 gcc_auto_execute
+Cmple.exe input=Test_input_3 to_compile=Test_output_3 gcc_auto_execute
+Cmple.exe input=Test_input_4 to_compile=Test_output_4 gcc_auto_execute
+Cmple.exe input=Test_input_5 to_compile=Test_output_5 gcc_auto_execute
+Cmple.exe input=Test_input_6 to_compile=Test_output_6 gcc_auto_execute
