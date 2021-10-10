@@ -10,6 +10,11 @@ Comes from "C" and "Simple"
 - [Cmple: Overview](#cmple)
 - [Table of Contents](#table-of-contents)
 - [Current status](#current-project-status)
+- [Project Requirements](#project-requirements)
+  - [Glossary](#glossary)
+  - [Stakeholders](#stakeholders)
+  - [User stories](#user-stories)
+  - [Non-functional requirements](#nonfunctional-requirements)
 - [Repository structure](#repository-structure)
 - [Features](#features)
 - [Getting Started](#getting-started)
@@ -24,6 +29,54 @@ File parser is provided. Missing functions are automatically filled. Interface a
 
 Graphical features are supported for windows creation, basic rendering, input processing.
 
+## Project requirements ##
+### Glossary ###
+Term | Description
+---- | -----------
+File converter | A program that converts code written in simplified language to C++ code.
+Wrapper | A tool that converts signature of function written in simplified language to syntactically correct C++ function.
+Dependency | A relationship of types or objects, between different files
+Toolchain | A set of programs used one after another to produce a final program out of code files.
+Visibility | A space in code, where a variable or type can be accessed.
+Resolver | A function that gives access to objects through a specific identifier.
+
+### Stakeholders ###
+Name | Duty | Roles | Responsibilities
+---- | ---- | ----- | ----------------
+Igor Parfenov | Main developer | Programmer, debugger, testing | Write code, debug code, test code
+Anton Dospekhov | Product Manager | Programmer, QA engineer | Write code, check other platforms compatibility, delivery management, user experience design, documentation, git repository management
+
+### User stories ###
+Title | Story
+----- | -----
+C++ file converter | As a developer, I want to be able to write simple script code, so the program converts my simple source files into complete C++ files
+Check syntax correctness | As a developer, I want to be able to be sure that input code has correct syntax, so the compiler would get valid files to compile.
+Function wrapper | As a developer, I want my functions to have consistent signatures, so the wrapper should check declaration and naming rules.
+Class wrapper | As a developer, I want my classes to have consistent structure, so the wrapper should check the interface of the declared class.
+Dependency manager | As a developer, I want all libraries and modules to be imported automatically, so the program would create and manage required header files.
+Toolchain manager | As a developer, I want to automate compilation of code, after successful processing, so the tool would call the compiler tool chain with required arguments.
+Visibility resolver | As a developer, I want the system to automatically manage access to the code interface, so the system would put appropriate access specifiers automatically.
+Memory management system | As a developer, I don’t want to manually manage memory and resources, so the system would inject simplified automatic memory allocation and release utility.
+
+### Non-functional requirement ###
+Category | Requirement | Actions to achieve
+-------- | ----------- | ------------------
+Performance Efficiency | Resource Utilization | Create the system to manage memory and keep track of the memory allocations and deallocations for objects of classes.
+Usability | Learnability | Create a manual and example file.
+Usability | User error protection | Write a delegator that would pass input to the syntax checking tool to ensure primary correctness.
+Compatibility | Interoperability | The utility will be a console application, so it would be platform independent.
+Maintainability | Testability | We will include an option to enable debugging symbols.
+
+## Features ##
+- C++ file converter: program converts simple source files into complete C++ files
+- Syntax correctness check.
+- Function wrapper: The wrapper checks declaration and naming rules.
+- Class wrapper: The wrapper checks the interface of the declared class.
+- Dependency manager: All libraries and modules to be imported automatically, so the program creates and manages required header files.
+- Toolchain manager: tool calls the compiler toolchain with required arguments.
+- Visibility resolver: The system automatically manages access to the code interface.
+- Memory management system: The system injects simplified automatic memory allocation and release utility.
+
 ## Repository structure ##
 Cmple project is implemented in C++. The directory structure follows universal CMake pattern:
 
@@ -35,16 +88,6 @@ Cmple project is implemented in C++. The directory structure follows universal C
 	/Tests		    Test subproject
 	/Examples	    Example project inputs & outputs
 
-
-## Features ##
-- C++ file converter: program converts simple source files into complete C++ files
-- Syntax correctness check.
-- Function wrapper: The wrapper checks declaration and naming rules.
-- Class wrapper: The wrapper checks the interface of the declared class.
-- Dependency manager: All libraries and modules to be imported automatically, so the program creates and manages required header files.
-- Toolchain manager: tool calls the compiler toolchain with required arguments.
-- Visibility resolver: The system automatically manages access to the code interface.
-- Memory management system: The system injects simplified automatic memory allocation and release utility.
 
 ## Getting Started ##
 
@@ -132,9 +175,24 @@ set(ENABLE_TESTS OFF CACHE BOOL "Build tests" FORCE)
 All executable are stored inside `Build/` folder. Main executable is in `Build/Core/`.
 Test executable is in `Build/Tests/`.
 
-## Examples ##
+## Code quality ##
+### Video demo ###
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/VaRLXqnf4Ms/0.jpg)](http://www.youtube.com/watch?v=VaRLXqnf4Ms "Video Title")
+### Code analysis ###
+During development the latest/safest modern C++ techniques were used. To ensure For C++ code analysis in this project several linters (static code analysis tools):
+- JetBrains Resharper++ Code Inspection
+![Resharper CA Settings](Docs/resharper-filter.png)
+![Resharper CA](Docs/resharper.png)
+- PVS-Studio
+![PVS-Studio](Docs/pvs-studio.png)
+- Microsoft Visual C++ Code Analysis Tool (with Recommended Native C++ Ruleset)
+![MSVC CA](Docs/msvc-ca.png)
+- Clang-Tidy as part of LLVM
+![Clang-Tidy](Docs/clang-tidy.png)
 
-To be filled
+### Testing ###
+Testing is performed using GTest library. We test by feeding test input to the tool and comparing it with the expected output.
+![Test results example](Docs/tests.png)
 
 ## Contributing ##
 
