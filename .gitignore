@@ -1,2 +1,5 @@
 Build/
 .*
+Sandbox/
+
+*.exe

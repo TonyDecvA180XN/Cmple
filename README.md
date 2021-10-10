@@ -10,8 +10,14 @@ Comes from "C" and "Simple"
 - [Cmple: Overview](#cmple)
 - [Table of Contents](#table-of-contents)
 - [Current status](#current-project-status)
+- [Project Requirements](#project-requirements)
+  - [Glossary](#glossary)
+  - [Stakeholders](#stakeholders)
+  - [User stories](#user-stories)
+  - [Non-functional requirements](#nonfunctional-requirements)
 - [Repository structure](#repository-structure)
 - [Features](#features)
+- [Design & Architecture](#design-and-architecture)
 - [Getting Started](#getting-started)
   - [Quick Start: Windows](#quick-start-windows)
   - [Quick Start: Unix](#quick-start-unix)
@@ -24,17 +30,43 @@ File parser is provided. Missing functions are automatically filled. Interface a
 
 Graphical features are supported for windows creation, basic rendering, input processing.
 
-## Repository structure ##
-Cmple project is implemented in C++. The directory structure follows universal CMake pattern:
+## Project requirements ##
+### Glossary ###
+Term | Description
+---- | -----------
+File converter | A program that converts code written in simplified language to C++ code.
+Wrapper | A tool that converts signature of function written in simplified language to syntactically correct C++ function.
+Dependency | A relationship of types or objects, between different files
+Toolchain | A set of programs used one after another to produce a final program out of code files.
+Visibility | A space in code, where a variable or type can be accessed.
+Resolver | A function that gives access to objects through a specific identifier.
 
-	/Build			Binary & Intermediate files (by CMake)
-	/Core			Cmple source code
-		/Include	Header public files
-		/Source		Source code private files
-	/ThirdParty		Third-party libraries
-	/Tests			Test subproject
-	/Examples		Example project inputs & outputs
+### Stakeholders ###
+Name | Duty | Roles | Responsibilities
+---- | ---- | ----- | ----------------
+Igor Parfenov | Main developer | Programmer, debugger, testing | Write code, debug code, test code
+Anton Dospekhov | Product Manager | Programmer, QA engineer | Write code, check other platforms compatibility, delivery management, user experience design, documentation, git repository management
 
+### User stories ###
+Title | Story
+----- | -----
+C++ file converter | As a developer, I want to be able to write simple script code, so the program converts my simple source files into complete C++ files
+Check syntax correctness | As a developer, I want to be able to be sure that input code has correct syntax, so the compiler would get valid files to compile.
+Function wrapper | As a developer, I want my functions to have consistent signatures, so the wrapper should check declaration and naming rules.
+Class wrapper | As a developer, I want my classes to have consistent structure, so the wrapper should check the interface of the declared class.
+Dependency manager | As a developer, I want all libraries and modules to be imported automatically, so the program would create and manage required header files.
+Toolchain manager | As a developer, I want to automate compilation of code, after successful processing, so the tool would call the compiler tool chain with required arguments.
+Visibility resolver | As a developer, I want the system to automatically manage access to the code interface, so the system would put appropriate access specifiers automatically.
+Memory management system | As a developer, I don’t want to manually manage memory and resources, so the system would inject simplified automatic memory allocation and release utility.
+
+### Non-functional requirement ###
+Category | Requirement | Actions to achieve
+-------- | ----------- | ------------------
+Performance Efficiency | Resource Utilization | Create the system to manage memory and keep track of the memory allocations and deallocations for objects of classes.
+Usability | Learnability | Create a manual and example file.
+Usability | User error protection | Write a delegator that would pass input to the syntax checking tool to ensure primary correctness.
+Compatibility | Interoperability | The utility will be a console application, so it would be platform independent.
+Maintainability | Testability | We will include an option to enable debugging symbols.
 
 ## Features ##
 - C++ file converter: program converts simple source files into complete C++ files
@@ -46,6 +78,31 @@ Cmple project is implemented in C++. The directory structure follows universal C
 - Visibility resolver: The system automatically manages access to the code interface.
 - Memory management system: The system injects simplified automatic memory allocation and release utility.
 
+## Repository structure ##
+Cmple project is implemented in C++. The directory structure follows universal CMake pattern:
+
+	/Build			Binary & Intermediate files (by CMake)
+	/Core			Cmple source code
+		/Include	Header public files
+		/Source		Source code private files
+	/ThirdParty		Third-party libraries
+	/Tests			Test subproject
+	/Examples		Example project inputs & outputs
+
+## Design and Architecture ##
+
+> For better experience understanding project architecture we recommend you to look at Beta-Phase presentation slides. They are available as [.pptx](Docs/Cmple.pptx) or [.pdf](Docs/Cmple.pdf). Most of the project architechture is descibed there.
+
+This is one of the schemes describing the code structure.
+![Development View](Docs/UML.png)
+As a peculiar example we can consider a Manager interface. It represents a Strategy design pattern and used for multiple parser features:
+- Each manager implements a `Transform()` method where it performs its part on processing project files.
+- Main converter class uses composition of implementations of Manager class. During conversion it "Transforms" each state of project to the new one.
+- Definition Manager is responsible for matching functions declarations & definitions.
+- SCManager (short for Separate Compilation Manager) is responsible for splitting the code base into headers and source files.
+- Memory Manager add memory access injections into the code where it needed.
+- Other managers can be easily added, if needed.
+
 ## Getting Started ##
 
 ### Quick Start: Windows ###
@@ -55,14 +112,14 @@ Prerequisites:
 - Git version 2.22 or newer
 - CMake version 3.15 or newer
 - C++ build environment as one of:
-	- Visual Studio 2019 with all following options:
-		- Desktop Development for C++
-		- C++ CMake tools for Windows
-		- Test Adapter for Google Test (for tests)
-		- C++ Clang tools for Windows (optional)
-		- LLVM suite for ClangCL builds (optional)
-	- MingGW64
-		- LLVM suite for Clang builds (optional)
+    - Visual Studio 2019 with all following options:
+        - Desktop Development for C++
+        - C++ CMake tools for Windows
+        - Test Adapter for Google Test (for tests)
+        - C++ Clang tools for Windows (optional)
+        - LLVM suite for ClangCL builds (optional)
+    - MinGW64
+        - LLVM suite for Clang builds (optional)
 
 First, download the repository with the following command:
 ```
@@ -132,9 +189,44 @@ set(ENABLE_TESTS OFF CACHE BOOL "Build tests" FORCE)
 All executable are stored inside `Build/` folder. Main executable is in `Build/Core/`.
 Test executable is in `Build/Tests/`.
 
-## Examples ##
+### Execution flags ###
 
-To be filled
+The **Cmple** program supports the following set of execution arguments:
+
+1. `input=\<directory\>`. This flag specifies the **user input directory**. By default it is **input**.
+
+2. `const_input=\<directory\>`. This flag specifies the **internal input directory**. By default it is `const_input`.
+
+3. `to_compile=\<directory\>`. This flag specifies the **output directory**. By default it is `to_compile`.
+
+4. `gcc_create_batch`. With this flag the parser will create batch file for compilation program using `GNU GCC` compiler.
+
+5. `gcc_auto_execute`. With this flag the parser will create `batch` file for compilation program using `GNU GCC` compiler and execute it.
+
+### Information for developers ###
+The manual for developers can be found [here](Docs/Manual.md).
+
+The API reference can be found [here](Docs/Reference.md).
+
+## Code quality ##
+### Video demo ###
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/VaRLXqnf4Ms/0.jpg)](http://www.youtube.com/watch?v=VaRLXqnf4Ms "Video Title")
+### Code analysis ###
+During development the latest/safest modern C++ techniques were used. To ensure For C++ code analysis in this project several linters (static code analysis tools):
+- JetBrains Resharper++ Code Inspection
+
+![Resharper CA Settings](Docs/resharper-filter.png)
+![Resharper CA](Docs/resharper.png)
+- PVS-Studio
+![PVS-Studio](Docs/pvs-studio.png)
+- Microsoft Visual C++ Code Analysis Tool (with Recommended Native C++ Ruleset)
+![MSVC CA](Docs/msvc-ca.png)
+- Clang-Tidy as part of LLVM
+![Clang-Tidy](Docs/clang-tidy.png)
+
+### Testing ###
+Testing is performed using GTest library. We test by feeding test input to the tool and comparing it with the expected output.
+![Test results example](Docs/tests.png)
 
 ## Contributing ##
 
