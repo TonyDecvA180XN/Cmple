@@ -1,5 +1,4 @@
-#ifndef FILEPARSER_H_INCLUDED
-#define FILEPARSER_H_INCLUDED
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -54,8 +53,6 @@ private:
     void CreateClassesDisplay2DFiles();
     void CreateFilesLoad();
     void CreateFilesAudioLoad();
-    void CopyConstInput() const;
-    static void CreateBatFile();
+    void CopyConstInput() const noexcept;
+    static void CreateBatFile() noexcept;
 };
-
-#endif // FILEPARSER_H_INCLUDED

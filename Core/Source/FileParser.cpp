@@ -214,7 +214,7 @@ void FileParser::ParseCreationCode()
     fileDataStream << fileInput.rdbuf();
     fileInput.close();
 
-    std::string fileData = fileDataStream.str();
+    const std::string fileData = fileDataStream.str();
 
     std::vector<std::string> split = SplitData(fileData);
     std::vector<std::string> splitSource = ParseStringsSource(split, DIRECTORY_CREATION_CODE);
@@ -591,13 +591,13 @@ void FileParser::CreateFilesAudioLoad()
     file.close();
 }
 
-void FileParser::CopyConstInput() const
+void FileParser::CopyConstInput() const noexcept
 {
     CleanDirectory(m_directoryToCompile);
     CopyDirectory(m_directoryConstInput, m_directoryToCompile);
 }
 
-void FileParser::CreateBatFile()
+void FileParser::CreateBatFile() noexcept
 {
 #ifdef __WIN32
     std::ofstream file_out("to_compile\\compile.bat");

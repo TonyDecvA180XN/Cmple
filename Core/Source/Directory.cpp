@@ -40,7 +40,7 @@ std::vector<std::string> FindFilesInDirectory(std::string directory)
 #endif // __unix__
 }
 
-void CopyDirectory([[maybe_unused]] std::string from, [[maybe_unused]] std::string to)
+void CopyDirectory(const std::string & from, const std::string & to) noexcept
 {
 #ifdef __WIN32
     std::string comand;
@@ -52,7 +52,7 @@ void CopyDirectory([[maybe_unused]] std::string from, [[maybe_unused]] std::stri
 #endif // __unix__
 }
 
-void CleanDirectory([[maybe_unused]] std::string path)
+void CleanDirectory(const std::string & path) noexcept
 {
 #ifdef __WIN32
     std::string comand;

@@ -1,5 +1,4 @@
-#ifndef DIRECTORY_H_INCLUDED
-#define DIRECTORY_H_INCLUDED
+#pragma once
 
 #ifdef _WIN32
 #include <windows.h>
@@ -10,9 +9,9 @@
 #endif // __unix__
 
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
-#include <set>
 
 inline const std::string DIRECTORY_INPUT_DEFAULT = "input";
 inline const std::string DIRECTORY_CONST_INPUT_DEFAULT = "const_input";
@@ -28,10 +27,10 @@ inline const std::string DIRECTORY_PREVIOUS = "..";
 inline const std::set<std::string> FUNCTION = {"Create", "Destroy", "Update", "Draw3D", "Draw2D"};
 
 std::vector<std::string> FindFilesInDirectory(std::string directory);
-void CopyDirectory(std::string from, std::string to);
-void CleanDirectory(std::string path);
+void CopyDirectory(const std::string & from, const std::string & to) noexcept;
+void CleanDirectory(const std::string & path) noexcept;
 
-std::string RemoveFirstDirectory(std::string & path);
+std::string RemoveFirstDirectory(const std::string & path);
 
 bool IsLetter(char c);
 bool IsLetterOrDigit(char c);
@@ -46,5 +45,3 @@ std::string ToUpper(std::string str);
 
 std::string RemoveExtension(std::string & file_name);
 std::string GetExtension(std::string & file_name);
-
-#endif // DIRECTORY_H_INCLUDED
