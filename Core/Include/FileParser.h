@@ -54,5 +54,5 @@ private:
     void CreateFilesLoad();
     void CreateFilesAudioLoad();
     void CopyConstInput() const noexcept;
-    static void CreateBatFile() noexcept;
+    void CreateBatFile() noexcept;
 };

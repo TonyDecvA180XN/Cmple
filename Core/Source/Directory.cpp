@@ -20,7 +20,7 @@ std::vector<std::string> FindFilesInDirectory(std::string directory)
     }
     else
     {
-        throw "Error: could not open directory " + directory;
+        throw "Error: could not open directory ";
     }
     return fileList;
 #endif // _WIN32
@@ -34,7 +34,7 @@ std::vector<std::string> FindFilesInDirectory(std::string directory)
         }
     }
     else {
-        throw "Error: could not open directory " + directory;
+        throw "Error: could not open directory ";
     }
     return file_list;
 #endif // __unix__

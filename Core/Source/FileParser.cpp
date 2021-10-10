@@ -32,11 +32,11 @@ void FileParser::ProcessArguments(const int argc, char ** argv)
         }
         if (command.size() >= 13 && command.substr(0, 12) == "const_input=")
         {
-            m_directoryInput = command.substr(12);
+            m_directoryConstInput = command.substr(12);
         }
         if (command.size() >= 12 && command.substr(0, 11) == "to_compile=")
         {
-            m_directoryInput = command.substr(11);
+            m_directoryToCompile = command.substr(11);
         }
         if (command == "gcc_create_batch")
         {
@@ -71,11 +71,11 @@ void FileParser::Parse()
             CreateBatFile();
 
 #ifdef __WIN32
-        if (gcc_auto_execute) {
+        if (m_gccAutoExecute) {
             std::string command;
-            command = "cd " + directory_to_compile + " & compile.bat";
+            command = "cd " + m_directoryToCompile + " & compile.bat";
             std::system(command.c_str());
-            command = "cd " + directory_to_compile + " & program.exe";
+            command = "cd " + m_directoryToCompile + " & program.exe";
             std::system(command.c_str());
         }
 #endif // __WIN32
@@ -92,7 +92,6 @@ void FileParser::Parse()
 void FileParser::ReadInputClasses()
 {
     const std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SCRIPTS);
-    std::cout.flush();
     for (std::string fileName : fileList)
     {
         if (fileName != DIRECTORY_CURRENT && fileName != DIRECTORY_PREVIOUS)
@@ -106,7 +105,6 @@ void FileParser::ReadInputClasses()
 void FileParser::ReadInputSprites()
 {
     const std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SPRITES);
-    std::cout.flush();
     for (std::string fileName : fileList)
     {
         if (fileName != DIRECTORY_CURRENT && fileName != DIRECTORY_PREVIOUS)
@@ -124,7 +122,6 @@ void FileParser::ReadInputSprites()
 void FileParser::ReadInputModels()
 {
     const std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_MODELS);
-    std::cout.flush();
     for (std::string fileName : fileList)
     {
         if (fileName != DIRECTORY_CURRENT && fileName != DIRECTORY_PREVIOUS)
@@ -141,7 +138,6 @@ void FileParser::ReadInputModels()
 void FileParser::ReadInputSounds()
 {
     const std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SOUNDS);
-    std::cout.flush();
     for (std::string fileName : fileList)
     {
         if (fileName != DIRECTORY_CURRENT && fileName != DIRECTORY_PREVIOUS)
@@ -599,7 +595,7 @@ void FileParser::CopyConstInput() const noexcept
 void FileParser::CreateBatFile() noexcept
 {
 #ifdef __WIN32
-    std::ofstream file_out("to_compile\\compile.bat");
+    std::ofstream file_out(m_directoryToCompile + "\\compile.bat");
     file_out << "gcc glad.c -c\n";
     file_out << "g++ camera.cpp -c\n";
     file_out << "g++ classes_implementation.cpp -c\n";
@@ -613,7 +609,7 @@ void FileParser::CreateBatFile() noexcept
     file_out << "g++ sprite.cpp -c\n";
     file_out << "g++ stb_image.cpp -c\n";
 
-    for (std::string class_name : classes) {
+    for (std::string class_name : m_classes) {
         file_out << "g++ " + class_name + ".cpp -c\n";
     }
 
@@ -630,7 +626,7 @@ void FileParser::CreateBatFile() noexcept
     file_out << "sprite.o ";
     file_out << "stb_image.o ";
 
-    for (std::string class_name : classes) {
+    for (std::string class_name : m_classes) {
         file_out << class_name << ".o ";
     }
 
