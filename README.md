@@ -189,6 +189,25 @@ set(ENABLE_TESTS OFF CACHE BOOL "Build tests" FORCE)
 All executable are stored inside `Build/` folder. Main executable is in `Build/Core/`.
 Test executable is in `Build/Tests/`.
 
+### Execution flags ###
+
+The **Cmple** program supports the following set of execution arguments:
+
+1. `input=\<directory\>`. This flag specifies the **user input directory**. By default it is **input**.
+
+2. `const_input=\<directory\>`. This flag specifies the **internal input directory**. By default it is `const_input`.
+
+3. `to_compile=\<directory\>`. This flag specifies the **output directory**. By default it is `to_compile`.
+
+4. `gcc_create_batch`. With this flag the parser will create batch file for compilation program using `GNU GCC` compiler.
+
+5. `gcc_auto_execute`. With this flag the parser will create `batch` file for compilation program using `GNU GCC` compiler and execute it.
+
+### Information for developers ###
+The manual for developers can be found [here](Docs/Manual.md).
+
+The API reference can be found [here](Docs/Reference.md).
+
 ## Code quality ##
 ### Video demo ###
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/VaRLXqnf4Ms/0.jpg)](http://www.youtube.com/watch?v=VaRLXqnf4Ms "Video Title")
