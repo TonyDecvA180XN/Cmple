@@ -60,7 +60,7 @@ void FileParser::Parse()
         ReadInputModels();
         ReadInputSounds();
 
-        std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SCRIPTS);
+        //std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SCRIPTS);
         for (const std::string className : m_classes)
         {
             ParseFile(className);
@@ -99,7 +99,7 @@ void FileParser::ReadInputClasses()
         if (fileName != DIRECTORY_CURRENT && fileName != DIRECTORY_PREVIOUS)
         {
             if (IsCpp(fileName) && RemoveExtension(fileName) != DIRECTORY_CREATION_CODE)
-                m_classes.insert(RemoveExtension(fileName));
+                m_classes.emplace(RemoveExtension(fileName));
         }
     }
 }
@@ -114,7 +114,7 @@ void FileParser::ReadInputSprites()
         {
             if (IsImage(fileName))
             {
-                m_sprites.insert(RemoveExtension(fileName));
+                m_sprites.emplace(RemoveExtension(fileName));
                 m_spritesExtensions[RemoveExtension(fileName)] = GetExtension(fileName);
             }
         }
@@ -132,7 +132,7 @@ void FileParser::ReadInputModels()
         {
             if (IsModel(fileName))
             {
-                m_models.insert(RemoveExtension(fileName));
+                m_models.emplace(RemoveExtension(fileName));
             }
         }
     }
@@ -149,7 +149,7 @@ void FileParser::ReadInputSounds()
         {
             if (IsSound(fileName))
             {
-                m_sounds.insert(RemoveExtension(fileName));
+                m_sounds.emplace(RemoveExtension(fileName));
                 m_soundsExtensions[RemoveExtension(fileName)] = GetExtension(fileName);
             }
         }
@@ -157,9 +157,9 @@ void FileParser::ReadInputSounds()
     CopyDirectory(m_directoryInput + "\\" + DIRECTORY_SOUNDS, m_directoryToCompile + "\\" + DIRECTORY_SOUNDS);
 }
 
-std::deque<std::string> FileParser::SplitData(const std::string data)
+std::vector<std::string> FileParser::SplitData(const std::string & data)
 {
-    std::deque<std::string> split;
+    std::vector<std::string> split;
     std::string curString;
     for (const char curChar : data)
     {
@@ -174,7 +174,7 @@ std::deque<std::string> FileParser::SplitData(const std::string data)
                 split.push_back(curString);
                 curString.clear();
             }
-            split.push_back(std::string{curChar});
+            split.emplace_back(std::string{curChar});
         }
     }
     return split;
@@ -189,8 +189,8 @@ void FileParser::ParseFile(std::string file_name)
 
     std::string fileData = fileDataStream.str();
 
-    std::deque<std::string> split = SplitData(fileData);
-    std::deque<std::string> splitSource = ParseStringsSource(split, RemoveExtension(file_name));
+    std::vector<std::string> split = SplitData(fileData);
+    std::vector<std::string> splitSource = ParseStringsSource(split, RemoveExtension(file_name));
     std::ofstream fileOutputSource((m_directoryToCompile + "\\" + file_name + ".cpp").c_str());
     for (std::string word : splitSource)
     {
@@ -198,7 +198,7 @@ void FileParser::ParseFile(std::string file_name)
     }
     fileOutputSource.close();
 
-    std::deque<std::string> splitHeader = ParseStringsHeader(split, RemoveExtension(file_name));
+    std::vector<std::string> splitHeader = ParseStringsHeader(split, RemoveExtension(file_name));
     std::ofstream fileOutputHeader((m_directoryToCompile + "\\" + file_name + ".h").c_str());
     for (std::string word : splitHeader)
     {
@@ -216,8 +216,8 @@ void FileParser::ParseCreationCode()
 
     std::string fileData = fileDataStream.str();
 
-    std::deque<std::string> split = SplitData(fileData);
-    std::deque<std::string> splitSource = ParseStringsSource(split, DIRECTORY_CREATION_CODE);
+    std::vector<std::string> split = SplitData(fileData);
+    std::vector<std::string> splitSource = ParseStringsSource(split, DIRECTORY_CREATION_CODE);
     std::ofstream fileOutputSource((m_directoryToCompile + "\\" + DIRECTORY_CREATION_CODE + ".h").c_str());
     for (std::string word : splitSource)
     {
@@ -226,7 +226,7 @@ void FileParser::ParseCreationCode()
     fileOutputSource.close();
 }
 
-std::deque<std::string> FileParser::ParseStringsHeader(std::deque<std::string> split, const std::string class_name)
+std::vector<std::string> FileParser::ParseStringsHeader(std::vector<std::string> split, const std::string & class_name)
 {
     for (size_t i = 0; i < split.size(); i++)
     {
@@ -237,7 +237,7 @@ std::deque<std::string> FileParser::ParseStringsHeader(std::deque<std::string> s
         else if (split[i] == "{")
         {
             int level = 1;
-            split[i] = "";
+            split[i].clear();
             i++;
             while (i < split.size() && level != 0)
             {
@@ -245,7 +245,7 @@ std::deque<std::string> FileParser::ParseStringsHeader(std::deque<std::string> s
                     level++;
                 else if (split[i] == "}")
                     level--;
-                split[i] = "";
+                split[i].clear();
                 i++;
             }
         }
@@ -278,11 +278,11 @@ std::deque<std::string> FileParser::ParseStringsHeader(std::deque<std::string> s
     const std::string toAddBack1 = "\n};\n\n";
     const std::string toAddBack2 = "#endif // " + ToUpper(class_name) + "_H_INCLUDED\n";
 
-    split.push_front(toAddFront5);
-    split.push_front(toAddFront4);
-    split.push_front(toAddFront3);
-    split.push_front(toAddFront2);
-    split.push_front(toAddFront1);
+    split.insert(split.begin(), toAddFront5);
+    split.insert(split.begin(), toAddFront4);
+    split.insert(split.begin(), toAddFront3);
+    split.insert(split.begin(), toAddFront2);
+    split.insert(split.begin(), toAddFront1);
     split.push_back(toAddBack1);
     split.push_back(toAddBack2);
 
@@ -290,7 +290,7 @@ std::deque<std::string> FileParser::ParseStringsHeader(std::deque<std::string> s
     return split;
 }
 
-std::deque<std::string> FileParser::ParseStringsSource(std::deque<std::string> split, std::string class_name)
+std::vector<std::string> FileParser::ParseStringsSource(std::vector<std::string> split, const std::string & class_name)
 {
     std::map<std::string, std::string> variables;
     std::stack<std::map<std::string, std::string>> stackOfVariables;
@@ -319,7 +319,7 @@ std::deque<std::string> FileParser::ParseStringsSource(std::deque<std::string> s
         }
         if (m_classes.find(split[i]) != m_classes.end())
         {
-            std::string variableName = split[i];
+            const std::string variableName = split[i];
             split[i] = split[i] + "_typename";
             for (size_t j = i + 1; j < split.size(); j++)
             {
@@ -333,15 +333,15 @@ std::deque<std::string> FileParser::ParseStringsSource(std::deque<std::string> s
         }
         else if (variables.count(split[i]))
         {
-            int depth = 0;
-            int posEnd = i;
+            int64_t depth = 0;
+            size_t posEnd = i;
             for (size_t j = i + 1; j < split.size(); j++)
             {
                 if (split[j] == "[")
                     depth++;
                 if (split[j] == "]")
                     depth--;
-                if (split[j] == "&" || IsSpace(split[j]) && depth == 0)
+                if (split[j] == "&" || (IsSpace(split[j]) && depth == 0))
                 {
                     posEnd = j;
                     break;
@@ -362,15 +362,15 @@ std::deque<std::string> FileParser::ParseStringsSource(std::deque<std::string> s
 
     if (class_name != DIRECTORY_CREATION_CODE)
     {
-        std::string toAddFront1 = "#include \"classes_implementation.h\"\n\n";
-        std::string toAddBack1 = "\n";
+        const std::string toAddFront1 = "#include \"classes_implementation.h\"\n\n";
+        const std::string toAddBack1 = "\n";
 
-        split.push_front(toAddFront1);
+        split.insert(split.begin(), toAddFront1);
         split.push_back(toAddBack1);
     }
     else
     {
-        std::string toAddBack1 = "\n";
+        const std::string toAddBack1 = "\n";
 
         split.push_back(toAddBack1);
     }

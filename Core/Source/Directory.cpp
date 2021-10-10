@@ -1,5 +1,8 @@
 #include "Directory.h"
 
+using namespace std::string_literals;
+const static size_t MIN_LENGTH = std::string(".ext").size();
+
 std::vector<std::string> FindFilesInDirectory(std::string directory)
 {
     directory += "\\*";
@@ -65,9 +68,9 @@ void CleanDirectory([[maybe_unused]] std::string path)
 #endif // __unix__
 }
 
-std::string RemoveFirstDirectory(std::string path)
+std::string RemoveFirstDirectory(const std::string & path)
 {
-    for (int i = 0; i <= static_cast<int>(path.size()); i++)
+    for (size_t i = 0; i < path.size(); i++)
     {
         if (path[i] == '\\')
         {
@@ -92,7 +95,7 @@ bool IsSpace(const char c)
     return c == ' ' || c == '\t' || c == '\n';
 }
 
-bool IsSpace(const std::string str)
+bool IsSpace(const std::string & str)
 {
     for (size_t i = 0; i < str.size(); i++)
     {
@@ -104,32 +107,32 @@ bool IsSpace(const std::string str)
     return true;
 }
 
-bool IsCpp(const std::string str)
+bool IsCpp(const std::string & str)
 {
-    return str.size() >= 4 && str.substr(str.size() - 4) == ".cpp";
+    return str.size() >= MIN_LENGTH && str.substr(str.size() - MIN_LENGTH) == ".cpp";
 }
 
-bool IsImage(const std::string str)
+bool IsImage(const std::string & str)
 {
-    return str.size() >= 4 && (str.substr(str.size() - 4) == ".bmp" ||
-        str.substr(str.size() - 4) == ".png" ||
-        str.substr(str.size() - 4) == ".jpg");
+    return str.size() >= MIN_LENGTH && (str.substr(str.size() - MIN_LENGTH) == ".bmp" ||
+        str.substr(str.size() - MIN_LENGTH) == ".png" ||
+        str.substr(str.size() - MIN_LENGTH) == ".jpg");
 }
 
-bool IsModel(const std::string str)
+bool IsModel(const std::string & str)
 {
-    return str.size() >= 4 && (str.substr(str.size() - 4) == ".obj" ||
-        str.substr(str.size() - 4) == ".mtl" ||
-        str.substr(str.size() - 4) == ".bmp" ||
-        str.substr(str.size() - 4) == ".png" ||
-        str.substr(str.size() - 4) == ".jpg");
+    return str.size() >= MIN_LENGTH && (str.substr(str.size() - MIN_LENGTH) == ".obj" ||
+        str.substr(str.size() - MIN_LENGTH) == ".mtl" ||
+        str.substr(str.size() - MIN_LENGTH) == ".bmp" ||
+        str.substr(str.size() - MIN_LENGTH) == ".png" ||
+        str.substr(str.size() - MIN_LENGTH) == ".jpg");
 }
 
-bool IsSound(const std::string str)
+bool IsSound(const std::string & str)
 {
-    return str.size() >= 4 && (str.substr(str.size() - 4) == ".wav" ||
-        str.substr(str.size() - 4) == ".mp3" ||
-        str.substr(str.size() - 4) == ".ogg");
+    return str.size() >= MIN_LENGTH && (str.substr(str.size() - MIN_LENGTH) == ".wav" ||
+        str.substr(str.size() - MIN_LENGTH) == ".mp3" ||
+        str.substr(str.size() - MIN_LENGTH) == ".ogg");
 }
 
 std::string ToUpper(std::string str)
@@ -144,7 +147,7 @@ std::string ToUpper(std::string str)
     return str;
 }
 
-std::string RemoveExtension(std::string file_name)
+std::string RemoveExtension(std::string & file_name)
 {
     if (file_name.empty())
         return file_name;
@@ -158,11 +161,11 @@ std::string RemoveExtension(std::string file_name)
     return file_name;
 }
 
-std::string GetExtension(std::string file_name)
+std::string GetExtension(std::string & file_name)
 {
     if (file_name.empty())
         return file_name;
-    for (int i = file_name.size() - 1; i >= 0; i--)
+    for (int64_t i = file_name.size() - 1; i >= 0; i--)
     {
         if (file_name[i] == '.')
         {

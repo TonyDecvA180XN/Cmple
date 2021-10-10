@@ -37,13 +37,13 @@ private:
     void ReadInputModels();
     void ReadInputSounds();
 
-    static std::deque<std::string> SplitData(std::string data);
+    static std::vector<std::string> SplitData(const std::string & data);
 
     void ParseFile(std::string file_name);
     void ParseCreationCode();
 
-    std::deque<std::string> ParseStringsHeader(std::deque<std::string> split, std::string class_name);
-    std::deque<std::string> ParseStringsSource(std::deque<std::string> split, std::string class_name);
+    std::vector<std::string> ParseStringsHeader(std::vector<std::string> split, const std::string & class_name);
+    std::vector<std::string> ParseStringsSource(std::vector<std::string> split, const std::string & class_name);
 
     void CreateIncludeFiles();
 
