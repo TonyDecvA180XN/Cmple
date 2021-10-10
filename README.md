@@ -17,6 +17,7 @@ Comes from "C" and "Simple"
   - [Non-functional requirements](#nonfunctional-requirements)
 - [Repository structure](#repository-structure)
 - [Features](#features)
+- [Design & Architecture](#design-and-architecture)
 - [Getting Started](#getting-started)
   - [Quick Start: Windows](#quick-start-windows)
   - [Quick Start: Unix](#quick-start-unix)
@@ -88,6 +89,19 @@ Cmple project is implemented in C++. The directory structure follows universal C
 	/Tests		    Test subproject
 	/Examples	    Example project inputs & outputs
 
+## Design and Architecture ##
+
+> For better experience understanding project architecture we recommend you to look at Beta-Phase presentation slides. They are available as [.pptx](Docs/Cmple.pptx) or [.pdf](Docs/Cmple.pdf). Most of the project architechture is descibed there.
+
+This is one of the schemes describing the code structure.
+![Development View](Docs/UML.png)
+As a peculiar example we can consider a Manager interface. It represents a Strategy design pattern and used for multiple parser features:
+- Each manager implements a `Transform()` method where it performs its part on processing project files.
+- Main converter class uses composition of implementations of Manager class. During conversion it "Transforms" each state of project to the new one.
+- Definition Manager is responsible for matching functions declarations & definitions.
+- SCManager (short for Separate Compilation Manager) is responsible for splitting the code base into headers and source files.
+- Memory Manager add memory access injections into the code where it needed.
+- Other managers can be easily added, if needed.
 
 ## Getting Started ##
 
@@ -104,7 +118,7 @@ Prerequisites:
         - Test Adapter for Google Test (for tests)
         - C++ Clang tools for Windows (optional)
         - LLVM suite for ClangCL builds (optional)
-    - MingGW64
+    - MinGW64
         - LLVM suite for Clang builds (optional)
 
 First, download the repository with the following command:
@@ -181,6 +195,7 @@ Test executable is in `Build/Tests/`.
 ### Code analysis ###
 During development the latest/safest modern C++ techniques were used. To ensure For C++ code analysis in this project several linters (static code analysis tools):
 - JetBrains Resharper++ Code Inspection
+
 ![Resharper CA Settings](Docs/resharper-filter.png)
 ![Resharper CA](Docs/resharper.png)
 - PVS-Studio
