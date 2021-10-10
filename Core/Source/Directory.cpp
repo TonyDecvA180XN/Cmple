@@ -82,12 +82,12 @@ std::string RemoveFirstDirectory(const std::string & path)
 
 bool IsLetter(const char c)
 {
-    return c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z';
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
 bool IsLetterOrDigit(const char c)
 {
-    return c >= 'A' && c <= 'Z' || c >= 'a' && c <= 'z' || c >= '0' && c <= '9' || c == '_';
+    return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_';
 }
 
 bool IsSpace(const char c)

@@ -60,8 +60,7 @@ void FileParser::Parse()
         ReadInputModels();
         ReadInputSounds();
 
-        //std::vector<std::string> fileList = FindFilesInDirectory(m_directoryInput + "\\" + DIRECTORY_SCRIPTS);
-        for (const std::string className : m_classes)
+        for (const std::string & className : m_classes)
         {
             ParseFile(className);
         }
