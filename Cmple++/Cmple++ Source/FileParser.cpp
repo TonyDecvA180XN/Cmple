@@ -27,10 +27,10 @@ void FileParser::process_arguments(int argc, char** argv) {
             directory_input = command.substr(6);
         }
         if (command.size() >= 13 && command.substr(0, 12) == "const_input=") {
-            directory_input = command.substr(12);
+            directory_const_input = command.substr(12);
         }
         if (command.size() >= 12 && command.substr(0, 11) == "to_compile=") {
-            directory_input = command.substr(11);
+            directory_to_compile = command.substr(11);
         }
         if (command == "gcc_create_batch") {
             gcc_create_bat = true;
@@ -80,7 +80,6 @@ void FileParser::parse() {
 
 void FileParser::read_input_classes() {
     std::vector < std::string > file_list = find_files_in_directory(directory_input + "\\" + Directory_Scripts);
-    std::cout.flush();
     for (std::string file_name : file_list) {
         if (file_name != Directory_Current && file_name != Directory_Previous) {
             if (is_cpp(file_name) && remove_extension(file_name) != Directory_Creation_Code)
@@ -91,7 +90,6 @@ void FileParser::read_input_classes() {
 
 void FileParser::read_input_sprites() {
     std::vector < std::string > file_list = find_files_in_directory(directory_input + "\\" + Directory_Sprites);
-    std::cout.flush();
     for (std::string file_name : file_list) {
         if (file_name != Directory_Current && file_name != Directory_Previous) {
             if (is_image(file_name)) {
@@ -105,7 +103,6 @@ void FileParser::read_input_sprites() {
 
 void FileParser::read_input_models() {
     std::vector < std::string > file_list = find_files_in_directory(directory_input + "\\" + Directory_Models);
-    std::cout.flush();
     for (std::string file_name : file_list) {
         if (file_name != Directory_Current && file_name != Directory_Previous) {
             if (is_model(file_name)) {
@@ -118,7 +115,6 @@ void FileParser::read_input_models() {
 
 void FileParser::read_input_sounds() {
     std::vector < std::string > file_list = find_files_in_directory(directory_input + "\\" + Directory_Sounds);
-    std::cout.flush();
     for (std::string file_name : file_list) {
         if (file_name != Directory_Current && file_name != Directory_Previous) {
             if (is_sound(file_name)) {
@@ -504,7 +500,7 @@ void FileParser::copy_const_input() {
 
 void FileParser::create_bat_file() {
 #ifdef __WIN32
-    std::ofstream file_out("to_compile\\compile.bat");
+    std::ofstream file_out(directory_to_compile + "\\compile.bat");
     file_out << "gcc glad.c -c\n";
     file_out << "g++ camera.cpp -c\n";
     file_out << "g++ classes_implementation.cpp -c\n";

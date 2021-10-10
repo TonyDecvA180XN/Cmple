@@ -23,7 +23,7 @@
                 </ul>
             </p>
 
-            <p>Last update 09.10.2021</p>
+            <p>Last update 10.10.2021</p>
         </header>
 
         <main>
@@ -38,7 +38,8 @@
                                 <ol>
                                     <li><a href="#How to use it">How to use it</a></li>
                                     <li><a href="#Execution flags">Execution flags</a></li>
-                                    <li><a href="#Supported operating systems and compilers">Supported operating systems and compilers</a></li>
+                                    <li><a href="#Supported compilers">Supported compilers</a></li>
+                                    <li><a href="#Supported operating systems">Supported operating systems</a></li>
                                 </ol>
                             </li>
 
@@ -188,25 +189,26 @@
                             After successful parsing the user will have the source code and all resource files in <b>output directory</b>. It is his decision how to compile it. There are following ways:
                             <ul>
                                 <li>If user works with <b>GNU GCC 64-bit</b> compiler, he can use corresponding integrated execution flags.</li>
-                                <li>Otherwise user can use <b>CMake</b> to configure the project file for his IDE</li>
+                                <li>Otherwise user can use <b>CMake</b> to configure the project file for his IDE.</li>
                             </ul>
                         </p>
                         <a href="#Navigation">Navigation</a>
 
                         <h4 id="Execution flags">1.1.2. Execution flags</h3>
                         <p>
-                            The <b>Cmple++</b> program supports the following set of execution arguments.
+                            The <b>Cmple++</b> program supports the following set of execution arguments:
                             <ol>
-                                <li><b>input=&ltdirectory&gt</b>. This flag specifies the <b>user input directory</b>. By default it is <b>input</b></li>
-                                <li><b>const_input=&ltdirectory&gt</b>. This flag specifies the <b>internal input directory</b>. By default it is <b>const_input</b></li>
-                                <li><b>to_compile=&ltdirectory&gt</b>. This flag specifies the <b>output directory</b>. By default it is <b>to_compile</b></li>
+                                <li><b>input=&ltdirectory&gt</b>. This flag specifies the <b>user input directory</b>. By default it is <b>input</b>.</li>
+                                <li><b>const_input=&ltdirectory&gt</b>. This flag specifies the <b>internal input directory</b>. By default it is <b>const_input</b>.</li>
+                                <li><b>to_compile=&ltdirectory&gt</b>. This flag specifies the <b>output directory</b>. By default it is <b>to_compile</b>.</li>
                                 <li><b>gcc_create_batch</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler.</li>
-                                <li><b>gcc_auto_execute</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler and execute it. </li>
+                                <li><b>gcc_auto_execute</b>. With this flag the parser will create <b>batch</b> file for compilation program using <b>GNU GCC</b> compiler and execute it.</li>
                             </ol>
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Supported operating systems and compilers">1.1.3. Supported operating systems and compilers</h3>
+
+                        <h4 id="Supported compilers">1.1.3. Supported compilers</h3>
                         <p>
                             The <b>Cmple++</b> supports following compilers:
                             <ul>
@@ -215,6 +217,11 @@
                                 <li>Clang</li>
                             </ul>
                             Only 64-bit compilers are supported.
+                        </p>
+                        <a href="#Navigation">Navigation</a>
+
+                        <h4 id="Supported operating systems">1.1.4. Supported operating systems</h3>
+                        <p>
                             The <b>Cmple++</b> supports following operating systems:
                             <ul>
                                 <li>Windows</li>
@@ -227,7 +234,7 @@
                         <h3 id="Input format">1.2. Input format</h2>
 
                         <p>
-                            This is the description of input. Read it before starting using <b>Cmple++</b>
+                            This is the description of input. Read it before starting using <b>Cmple++</b>.
                         </p>
 
                         <h4 id="User input directory">1.2.1. User input directory</h3>

@@ -14,7 +14,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
         FindClose(hl);
     }
     else {
-        throw "Error: could not open directory " + directory;
+        throw "Error: could not open directory";
     }
     return file_list;
 #endif // _WIN32
@@ -28,7 +28,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
         }
     }
     else {
-        throw "Error: could not open directory " + directory;
+        throw "Error: could not open directory";
     }
     return file_list;
 #endif // __unix__
