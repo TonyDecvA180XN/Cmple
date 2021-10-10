@@ -61,7 +61,7 @@
                                     <li><a href="#Class type">Class type</a></li>
                                     <li><a href="#Class API">Class API</a></li>
                                     <li><a href="#Input file parsing">Input file parsing</a></li>
-                                    <li><a href="#Include files">Include files</a></li>
+                                    <li><a href="#Output files">Output files</a></li>
                                 </ol>
                             </li>
 
@@ -210,7 +210,7 @@
 
                         <h4 id="Supported compilers">1.1.3. Supported compilers</h3>
                         <p>
-                            The <b>Cmple++</b> supports following compilers:
+                            Both <b>parser</b> and <b>engine</b> support following compilers:
                             <ul>
                                 <li>GNU GCC</li>
                                 <li>Visual C++</li>
@@ -222,7 +222,13 @@
 
                         <h4 id="Supported operating systems">1.1.4. Supported operating systems</h3>
                         <p>
-                            The <b>Cmple++</b> supports following operating systems:
+                            The <b>parser</b> supports following operating systems:
+                            <ul>
+                                <li>Windows</li>
+                                <li>Unix</li>
+                            </ul>
+
+                            The <b>engine</b> supports following operating systems:
                             <ul>
                                 <li>Windows</li>
                             </ul>
@@ -241,10 +247,10 @@
                         <p>
                             The <b>user input directory</b> has to contain following folders:
                             <ul>
-                                <li>scripts</li>
-                                <li>sprites</li>
-                                <li>models</li>
-                                <li>sounds</li>
+                                <li>Scripts</li>
+                                <li>Sprites</li>
+                                <li>Models</li>
+                                <li>Sounds</li>
                             </ul>
                         </p>
                         <a href="#Navigation">Navigation</a>
@@ -253,11 +259,11 @@
                         <p>
                             Each file <b>&ltname&gt.cpp</b> represents the class <b>name</b>. It has to be placed in <b>scripts</b> subdirectory. The file has to contain the following function:
                             <ul>
-                                <li>Create. This function is called once object is created.</li>
-                                <li>Destroy. This function is called once object is destroyed.</li>
-                                <li>Update. This function is called while each update iteration.</li>
-                                <li>Draw3D. This function is called while each render 3D iteration. This is the only place, where user can call functions related to 3D rendering.</li>
-                                <li>Draw2D. This function is called while each render 2D iteration. This is the only place, where user can call functions related to 2D rendering.</li>
+                                <li><b>Create</b>. This function is called once object is created.</li>
+                                <li><b>Destroy</b>. This function is called once object is destroyed.</li>
+                                <li><b>Update</b>. This function is called while each update iteration.</li>
+                                <li><b>Draw3D</b>. This function is called while each render 3D iteration. This is the only place, where user can call functions related to 3D rendering.</li>
+                                <li><b>Draw2D</b>. This function is called while each render 2D iteration. This is the only place, where user can call functions related to 2D rendering.</li>
                             </ul>
                             These function are written in form <b>&ltfunction&gt {...}</b>. No other functions has to be written. Also file may contain class variables. All code except the function declarations has to be written in accordance to <b>C++ standard</b>. View example to make it more clear.
                         </p>
@@ -273,10 +279,10 @@
                         <p>
                             Sprite has to be placed in <b>sprites</b> subdirectory. It can have one of following extensions:
                             <ul>
-                                <li>.jpg</li>
-                                <li>.png</li>
-                                <li>.bmp</li>
-                                <li>.tga</li>
+                                <li><b>.jpg</b></li>
+                                <li><b>.png</b></li>
+                                <li><b>.bmp</b></li>
+                                <li><b>.tga</b></li>
                             </ul>
                             There might be also undocumented support for some other extensions.
                         </p>
@@ -292,9 +298,9 @@
                         <p>
                             Sound has to be placed in <b>sounds</b> subdirectory. It can have one of following extensions:
                             <ul>
-                                <li>.mp3</li>
-                                <li>.ogg</li>
-                                <li>.wav</li>
+                                <li><b>.mp3</b></li>
+                                <li><b>.ogg</b></li>
+                                <li><b>.wav</b></li>
                             </ul>
                             There might be also undocumented support for some other extensions. Note: the loading of <b>.mp3</b> and <b>.ogg</b> extensions is relatively slow.
                         </p>
@@ -335,17 +341,17 @@
                         <p>
                             Input file has to contain a corresponding class. This class should not be declared according to <b>C++ standard</b>. Instead, the file has to contain variables and function in global scope. Only following functions has to be in the file:
                             <ul>
-                                <li>Create</li>
-                                <li>Destroy</li>
-                                <li>Update</li>
-                                <li>Draw3D</li>
-                                <li>Draw2D</li>
+                                <li><b>Create</b></li>
+                                <li><b>Destroy</b></li>
+                                <li><b>Update</b></li>
+                                <li><b>Draw3D</b></li>
+                                <li><b>Draw2D</b></li>
                             </ul>
                             This function has to be declared in form <b>&ltfunction&gt {...}</b>. Also all access to variables of classes has to be done through operator <b>&</b> instead of <b>.</b> or <b>-&gt</b>, as they has to be operated as class variables. The parser detects the scope of variables while checking, if a variable has a class type. There are no other restrictions, and the code has to be written in accordance to <b>C++ standard</b>. The parser creates both <b>source</b> and <b>header</b> files. There also has to be a <b>creation_code.cpp</b> file in <b>user input directory</b>. This code is parsed as a single function and can't have any function in it.
                         </p>
                         <a href="#Navigation">Navigation</a>
 
-                        <h4 id="Include files">1.3.4. Output scripts</h3>
+                        <h4 id="Output files">1.3.4. Output files</h3>
                         <p>
                             The parser create the following set of files in <b>output directory</b>:
                             <ul>
