@@ -20,7 +20,7 @@ std::vector < std::string > find_files_in_directory(std::string directory) {
 #endif // _WIN32
 #ifdef __unix__
     std::vector < std::string > file_list;
-    DIR* dir = opendir(directiry.c_str());
+    DIR* dir = opendir(directory.c_str());
     if (dir) {
         struct dirent* ent;
         while ((ent = readdir(dir)) != NULL) {
