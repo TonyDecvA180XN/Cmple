@@ -1,9 +1,9 @@
-#include <iostream>
 #include "FileParser.h"
 
-int main(int argc, char** argv) {
-    FileParser file_parser(argc, argv);
-    file_parser.parse();
+int main(const int argc, char ** argv)
+{
+    FileParser fileParser(argc, argv);
+    fileParser.Parse();
 
     return 0;
 }

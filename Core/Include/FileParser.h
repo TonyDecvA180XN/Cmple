@@ -10,52 +10,52 @@
 #include <fstream>
 #include <sstream>
 
-class FileParser {
+class FileParser
+{
 public:
-    FileParser(int argc, char** argv);
+    FileParser(int argc, char ** argv);
 
-    void parse();
+    void Parse();
 
 private:
+    std::string m_directoryInput;
+    std::string m_directoryConstInput;
+    std::string m_directoryToCompile;
+    bool m_gccCreateBat = false;
+    bool m_gccAutoExecute = false;
+    std::set<std::string> m_classes;
+    std::set<std::string> m_sprites;
+    std::map<std::string, std::string> m_spritesExtensions;
+    std::set<std::string> m_models;
+    std::set<std::string> m_sounds;
+    std::map<std::string, std::string> m_soundsExtensions;
 
-    std::string directory_input;
-    std::string directory_const_input;
-    std::string directory_to_compile;
-    bool gcc_create_bat = false;
-    bool gcc_auto_execute = false;
-    std::set < std::string > classes;
-    std::set < std::string > sprites;
-    std::map < std::string, std::string > sprites_extensions;
-    std::set < std::string > models;
-    std::set < std::string > sounds;
-    std::map < std::string, std::string > sounds_extensions;
+    void ProcessArguments(int argc, char ** argv);
 
-    void process_arguments(int argc, char** argv);
+    void ReadInputClasses();
+    void ReadInputSprites();
+    void ReadInputModels();
+    void ReadInputSounds();
 
-    void read_input_classes();
-    void read_input_sprites();
-    void read_input_models();
-    void read_input_sounds();
+    static std::deque<std::string> SplitData(std::string data);
 
-    std::deque < std::string > split_data(std::string data);
+    void ParseFile(std::string file_name);
+    void ParseCreationCode();
 
-    void parse_file(std::string file_name);
-    void parse_creation_code();
+    std::deque<std::string> ParseStringsHeader(std::deque<std::string> split, std::string class_name);
+    std::deque<std::string> ParseStringsSource(std::deque<std::string> split, std::string class_name);
 
-    std::deque < std::string > parse_strings_header(std::deque < std::string > split, std::string class_name);
-    std::deque < std::string > parse_strings_source(std::deque < std::string > split, std::string class_name);
+    void CreateIncludeFiles();
 
-    void create_include_files();
-
-    void create_classes_implementation_header_files();
-    void create_classes_implementation_source_files();
-    void create_classes_update_files();
-    void create_classes_display_3d_files();
-    void create_classes_display_2d_files();
-    void create_files_load();
-    void create_files_audio_load();
-    void copy_const_input();
-    void create_bat_file();
+    void CreateClassesImplementationHeaderFiles();
+    void CreateClassesImplementationSourceFiles();
+    void CreateClassesUpdateFiles();
+    void CreateClassesDisplay3DFiles();
+    void CreateClassesDisplay2DFiles();
+    void CreateFilesLoad();
+    void CreateFilesAudioLoad();
+    void CopyConstInput() const;
+    static void CreateBatFile();
 };
 
 #endif // FILEPARSER_H_INCLUDED

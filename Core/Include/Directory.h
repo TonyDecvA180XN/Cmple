@@ -14,37 +14,37 @@
 #include <vector>
 #include <set>
 
-const std::string Directory_Input_Default = "input";
-const std::string Directory_Const_Input_Default = "const_input";
-const std::string Directory_To_Compile_Default = "to_compile";
-const std::string Directory_Scripts = "scripts";
-const std::string Directory_Sprites = "sprites";
-const std::string Directory_Models = "models";
-const std::string Directory_Sounds = "sounds";
-const std::string Directory_Creation_Code = "creation_code";
+const std::string DIRECTORY_INPUT_DEFAULT = "input";
+const std::string DIRECTORY_CONST_INPUT_DEFAULT = "const_input";
+const std::string DIRECTORY_TO_COMPILE_DEFAULT = "to_compile";
+const std::string DIRECTORY_SCRIPTS = "scripts";
+const std::string DIRECTORY_SPRITES = "sprites";
+const std::string DIRECTORY_MODELS = "models";
+const std::string DIRECTORY_SOUNDS = "sounds";
+const std::string DIRECTORY_CREATION_CODE = "creation_code";
 
-const std::string Directory_Current = ".";
-const std::string Directory_Previous = "..";
-const std::set < std::string > Function = { "Create", "Destroy", "Update", "Draw3D", "Draw2D" };
+const std::string DIRECTORY_CURRENT = ".";
+const std::string DIRECTORY_PREVIOUS = "..";
+const std::set<std::string> FUNCTION = {"Create", "Destroy", "Update", "Draw3D", "Draw2D"};
 
-std::vector < std::string > find_files_in_directory(std::string directory);
-void copy_directory(std::string from, std::string to);
-void clean_directory(std::string path);
+std::vector<std::string> FindFilesInDirectory(std::string directory);
+void CopyDirectory(std::string from, std::string to);
+void CleanDirectory(std::string path);
 
-std::string remove_first_directory(std::string path);
+std::string RemoveFirstDirectory(std::string path);
 
-bool is_letter(char c);
-bool is_letter_or_digit(char c);
-bool is_space(char c);
-bool is_space(std::string str);
-bool is_cpp(std::string str);
-bool is_image(std::string str);
-bool is_model(std::string str);
-bool is_sound(std::string str);
+bool IsLetter(char c);
+bool IsLetterOrDigit(char c);
+bool IsSpace(char c);
+bool IsSpace(std::string str);
+bool IsCpp(std::string str);
+bool IsImage(std::string str);
+bool IsModel(std::string str);
+bool IsSound(std::string str);
 
-std::string to_upper(std::string str);
+std::string ToUpper(std::string str);
 
-std::string remove_extension(std::string file_name);
-std::string get_extension(std::string file_name);
+std::string RemoveExtension(std::string file_name);
+std::string GetExtension(std::string file_name);
 
 #endif // DIRECTORY_H_INCLUDED
