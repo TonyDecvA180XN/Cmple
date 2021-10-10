@@ -1,36 +1,16 @@
 #include "gtest/gtest.h"
-#include "feature.h"
 
 namespace FeatureTestSpace1
 {
-    TEST(FeatureTestCategory1, FeatureTestName1)
+    TEST(FeatureTestCategory1, MustPass)
     {
-        EXPECT_EQ(30, feature(5, 6));
-        EXPECT_EQ(6, feature(2, 3));
+        EXPECT_EQ(30, 30);
+        EXPECT_EQ(6, 6);
     }
-    TEST(FeatureTestCategory1, FeatureTestName2)
+    TEST(FeatureTestCategory1, MustFail)
     {
-        EXPECT_EQ(30, feature(5, 6));
-        EXPECT_EQ(6, feature(2, 3));
-    }
-    TEST(FeatureTestCategory2, FeatureTestName1)
-    {
-        EXPECT_EQ(30, feature(5, 6));
-        EXPECT_EQ(6, feature(2, 3));
-    }
-    TEST(FeatureTestCategory2, FeatureTestName2)
-    {
-        EXPECT_EQ(30, feature(5, 6));
-        EXPECT_EQ(6, feature(2, 3));
-    }
-
-}
-namespace FeatureTestSpace2
-{
-    TEST(FeatureTestCategory, FeatureTestName)
-    {
-        EXPECT_EQ(30, feature(5, 6));
-        EXPECT_EQ(6, feature(2, 3));
+        EXPECT_EQ(30, 10);
+        EXPECT_EQ(6, 4);
     }
 
 }

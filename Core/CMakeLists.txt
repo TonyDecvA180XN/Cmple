@@ -2,9 +2,12 @@
 set(CORE_INCLUDE ${PROJECT_SOURCE_DIR}/Core/Include)
 set(CORE_SOURCE ${PROJECT_SOURCE_DIR}/Core/Source)
 
+# Setup source code grab from specified firectories
+file(GLOB ${PROJECT_CORE_NAME}_SOURCE_FILES CONFIGURE_DEPENDS ${CORE_SOURCE}/*.cpp)
+
 # Define core library and runtime launcher
 add_executable(${PROJECT_NAME} ${CORE_SOURCE}/main.cpp)
-add_library(${PROJECT_CORE_NAME} ${CORE_SOURCE}/feature.cpp)
+add_library(${PROJECT_CORE_NAME} ${${PROJECT_CORE_NAME}_SOURCE_FILES})
 
 # Set compile requirements
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
